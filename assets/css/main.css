@@ -4061,6 +4061,10 @@ input, select, textarea {
 			}
 		}
 
+		.team p {
+			font-size: 1.5rem	;
+		}
+
 		#team-members .profile {
 			background-color: var(--gray-800);
 			margin-top: 1rem;
