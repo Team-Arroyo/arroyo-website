@@ -3984,6 +3984,11 @@ input, select, textarea {
 		background-image: linear-gradient(to right, var(--steel-blue), black);
 	}
 
+	#case-logo {
+		max-width: 250px;
+		margin: auto;
+	}
+
 /* TOC */
 	#toc {
 		background-color: var(--offwhite);
