@@ -4081,8 +4081,9 @@ input, select, textarea {
 		.social {
 			list-style: none;
 			display: flex;
+			justify-content: center;
 		}
 
 		.social li {
-			margin-left: 1.5rem;
+			margin-right: 1.5rem;
 		}
