@@ -4043,3 +4043,30 @@ input, select, textarea {
 		min-width: 1rem;
 		background-color: var(--steel-blue)
 	}
+
+	/* Team */
+		@media (min-width: 1024px) {
+			#team-members {
+				display: grid;
+				gap: 2rem;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+			}
+		}
+
+		@media (min-width: 640px) {
+			#team-members {
+				display: grid;
+				gap: 1.5rem;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+		}
+
+		#team-members .profile {
+			background-color: var(--gray-800);
+			margin-top: 1rem;
+			border-radius: 0.5rem;
+			padding: 2rem 1rem;
+			text-align: center;
+			list-style: none;
+		}
+
