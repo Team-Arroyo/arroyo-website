@@ -3037,6 +3037,7 @@ input, select, textarea {
 			display: block;
 			position: relative;
 			width: 25em;
+			max-width: 400px;
 		}
 
 			.spotlights > section > .image img {
