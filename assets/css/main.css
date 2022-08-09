@@ -4068,5 +4068,21 @@ input, select, textarea {
 			padding: 2rem 1rem;
 			text-align: center;
 			list-style: none;
+			max-width: 380px;
 		}
 
+		.profile img {
+			border-radius: 5rem;
+			height: 10rem;
+			width: 10rem;
+		}
+
+/* Social */
+		.social {
+			list-style: none;
+			display: flex;
+		}
+
+		.social li {
+			margin-left: 1.5rem;
+		}
