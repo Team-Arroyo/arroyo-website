@@ -3043,6 +3043,7 @@ input, select, textarea {
 			max-width: 400px;
 		}
 
+		
 			.spotlights > section > .image img {
 				border-radius: 0;
 				display: block;
@@ -3970,8 +3971,10 @@ input, select, textarea {
 		}
 
 /* Case Study */
-	#case-study {
-		margin-left: var(--toc-width);
+	@media screen and (min-width: 750px) {
+		#case-study {
+			margin-left: var(--toc-width);
+		}
 	}
 
 	#case-study h1, #case-study h2, #case-study h3  {
@@ -3992,6 +3995,14 @@ input, select, textarea {
 	}
 
 /* TOC */
+	@media screen and (min-width: 750px) {
+		#toc.show {
+			left: 0;
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
 	#toc {
 		background-color: var(--offwhite);
 		border-right: 1px solid var(--gray-200);
@@ -4003,6 +4014,7 @@ input, select, textarea {
 		position: fixed;
 		top: 4rem;
 		transition: all 0.5s ease;
+		visibility: hidden;
 		width: var(--toc-width);
 	}
 
@@ -4039,12 +4051,6 @@ input, select, textarea {
 
 	#toc .subitem {
 		margin-left: 1.625rem;
-	}
-
-	#toc.show {
-		left: 0;
-		opacity: 1;
-		visibility: visible;
 	}
 
 	#toc .selected .bullet {
