@@ -125,7 +125,7 @@ input, select, textarea {
 	}
 
 	body {
-		background: var(--offwhite);
+		background: var(--white	);
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -4004,7 +4004,7 @@ input, select, textarea {
 	}
 
 	#toc {
-		background-color: var(--offwhite);
+		background-color: var(--white);
 		border-right: 1px solid var(--gray-200);
 		bottom: 0;
 		left: calc(var(--toc-width) * -1);
