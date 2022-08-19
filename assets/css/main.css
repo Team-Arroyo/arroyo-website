@@ -17,7 +17,7 @@
   --offwhite: #F5F8FC;
 
 	/* Sizes */
-	--toc-width: 200px;
+	--toc-width: 300px;
 
   /* Grays */
   --white: #ffffff;
@@ -4047,6 +4047,10 @@ input, select, textarea {
 		font-size: 0.875rem;
 		font-weight: 500;
 		margin: 0 0 0 0.75rem;
+	}
+
+	#toc p:hover {
+		text-decoration: underline;
 	}
 
 	#toc .subitem {
