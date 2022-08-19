@@ -4162,6 +4162,7 @@ input, select, textarea {
 			border-radius: 5rem;
 			height: 10rem;
 			width: 10rem;
+			margin-bottom: 1rem;
 		}
 
 		.general p {
