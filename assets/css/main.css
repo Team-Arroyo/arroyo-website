@@ -3465,6 +3465,10 @@ input, select, textarea {
 						font-size: 2rem;
 					}
 
+					#header > nav > ul > li #home-icon {
+						font-size: 2rem;
+					}
+
 						#header > nav > ul > li a:hover {
 							color: rgba(255, 255, 255, 1);
 						}
