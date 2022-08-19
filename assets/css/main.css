@@ -4116,8 +4116,13 @@ input, select, textarea {
 			justify-content: space-around;
 		}
 
+		.team-section h2 {
+			color: white;
+		}
+
 		.team-section p {
 			font-size: 1.25rem;
+			color: rgba(255, 255, 255, 0.85);
 		}
 
 		#team-members .profile {
@@ -4171,7 +4176,9 @@ input, select, textarea {
 		}
 
 		.general h3 {
-			color: white;
+			color: rgba(255, 255, 255, 0.85);
+			font-size: large;
+			font-weight: bold;
 		}
 
 /* Social */
