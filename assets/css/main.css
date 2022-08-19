@@ -2646,12 +2646,6 @@ input, select, textarea {
 				width: 100%;
 			}
 
-      .home-page-image {
-        width: 200px;
-        height: 200px;
-        margin: auto;
-      }
-
 /* List */
 
 	ol {
@@ -3035,7 +3029,6 @@ input, select, textarea {
 		-webkit-flex-direction: row;
 		-ms-flex-direction: row;
 		flex-direction: row;
-		min-height: 22.5em;
 	}
 
 		body.is-ie .spotlights > section {
@@ -3048,8 +3041,7 @@ input, select, textarea {
 			border-radius: 0;
 			display: block;
 			position: relative;
-			width: 25em;
-			max-width: 400px;
+			width: 70vh;
 		}
 
 		
