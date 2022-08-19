@@ -4091,34 +4091,77 @@ input, select, textarea {
 	}
 
 	/* Team */
-		@media (min-width: 1024px) {
-			#team-members {
-				display: grid;
-				gap: 2rem;
-				grid-template-columns: repeat(3, minmax(0, 1fr));
-			}
+		.team-section {
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display: flex;
+			padding-top: 90px;
+			padding-bottom: 90px;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			-webkit-flex-direction: column;
+			-ms-flex-direction: column;
+			flex-direction: column;
+			-webkit-box-pack: center;
+			-webkit-justify-content: center;
+			-ms-flex-pack: center;
+			justify-content: center;
+			-webkit-box-align: center;
+			-webkit-align-items: center;
+			-ms-flex-align: center;
+			align-items: center;
+			text-align: center;
 		}
 
-		@media (min-width: 640px) {
-			#team-members {
-				display: grid;
-				gap: 1.5rem;
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-			}
+		.team-flex {
+			align-items: start;
+			display: flex;
+			flex-wrap: wrap;
+			width: 100%;
+			justify-content: space-around;
 		}
 
-		.team p {
-			font-size: 1.5rem	;
+		.team-section p {
+			font-size: 1.25rem;
 		}
 
 		#team-members .profile {
-			background-color: var(--gray-800);
-			margin-top: 1rem;
-			border-radius: 0.5rem;
-			padding: 2rem 1rem;
-			text-align: center;
-			list-style: none;
-			max-width: 380px;
+			padding: 0px;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			-webkit-flex-direction: column;
+			-ms-flex-direction: column;
+			flex-direction: column;
+			-webkit-box-pack: center;
+			-webkit-justify-content: center;
+			-ms-flex-pack: center;
+			justify-content: center;
+			-webkit-box-align: center;
+			-webkit-align-items: center;
+			-ms-flex-align: center;
+			align-items: center;
+		}
+
+		#team-members .general {
+			display: flex;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			-webkit-flex-direction: column;
+			-ms-flex-direction: column;
+			flex-direction: column;
+			-webkit-box-pack: center;
+			-webkit-justify-content: center;
+			-ms-flex-pack: center;
+			justify-content: center;
+			-webkit-box-align: center;
+			-webkit-align-items: center;
+			-ms-flex-align: center;
+			align-items: center;
 		}
 
 		.profile img {
@@ -4127,8 +4170,13 @@ input, select, textarea {
 			width: 10rem;
 		}
 
+		.general p {
+			margin: 0px;
+		}
+
 /* Social */
 		.social {
+			padding: 0px;
 			list-style: none;
 			display: flex;
 			justify-content: center;
