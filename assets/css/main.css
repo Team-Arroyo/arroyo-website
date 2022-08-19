@@ -178,7 +178,7 @@ input, select, textarea {
 		-webkit-transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		-ms-transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		transition: color 0.2s ease, border-bottom-color 0.2s ease;
-		border-bottom: dotted 1px rgba(255, 255, 255, 0.35);
+		border-bottom: dotted 1px rgba(255, 255, 255, 0.8);
 		color: inherit;
 		text-decoration: none;
 	}
@@ -4112,8 +4112,13 @@ input, select, textarea {
 			justify-content: space-around;
 		}
 
+		.team-section h2 {
+			color: white;
+		}
+
 		.team-section p {
 			font-size: 1.25rem;
+			color: rgba(255, 255, 255, 0.85);
 		}
 
 		#team-members .profile {
@@ -4158,10 +4163,18 @@ input, select, textarea {
 			border-radius: 5rem;
 			height: 10rem;
 			width: 10rem;
+			margin-bottom: 1rem;
 		}
 
 		.general p {
 			margin: 0px;
+			font-size: medium;
+		}
+
+		.general h3 {
+			color: rgba(255, 255, 255, 0.85);
+			font-size: large;
+			font-weight: bold;
 		}
 
 /* Social */
