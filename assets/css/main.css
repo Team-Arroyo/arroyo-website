@@ -4005,7 +4005,7 @@ input, select, textarea {
 
 	#toc {
 		background-color: var(--white);
-		border-right: 1px solid var(--gray-200);
+		/* border-right: 1px solid var(--gray-200); */
 		bottom: 0;
 		left: calc(var(--toc-width) * -1);
 		opacity: 0;
@@ -4044,7 +4044,7 @@ input, select, textarea {
 
 	#toc p {
 		color: black;
-		font-size: 0.875rem;
+		font-size: 1.1rem;
 		font-weight: 500;
 		margin: 0 0 0 0.75rem;
 	}
