@@ -3432,7 +3432,7 @@ input, select, textarea {
 			-webkit-flex: 1;
 			-ms-flex: 1;
 			flex: 1;
-			text-align: right;
+			text-align: left;
 		}
 
 			#header > nav > ul {
@@ -3453,7 +3453,7 @@ input, select, textarea {
 
 					#header > nav > ul > li a {
 						border: 0;
-						color: rgba(255, 255, 255, 0.35);
+						color: rgba(255, 255, 255, 0.85);
 						display: inline-block;
 						font-size: 0.6em;
 						font-weight: bold;
@@ -3465,8 +3465,12 @@ input, select, textarea {
 						font-size: 2rem;
 					}
 
+					#header > nav > ul > li #home-icon {
+						font-size: 2rem;
+					}
+
 						#header > nav > ul > li a:hover {
-							color: rgba(255, 255, 255, 0.55);
+							color: rgba(255, 255, 255, 1);
 						}
 
 						#header > nav > ul > li a.active {
