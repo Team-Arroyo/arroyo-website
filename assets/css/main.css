@@ -2036,7 +2036,6 @@ input, select, textarea {
 				border-left: solid 1px rgba(255, 255, 255, 0.15);
 			}
 
-   
 
 			.features section .icon {
 				-moz-transition: opacity 0.5s ease, -moz-transform 0.5s ease;
@@ -4204,15 +4203,23 @@ input, select, textarea {
      text-align: center;
     }
 
-    .home-page-architecture-image {
+    .home-page-architecture-image, .arroyo-phases-image {
       min-width: 300px;
       width: 100%;
       height: auto;
       margin: auto;
     }
+    
+    .arroyo-phases-image {
+      min-width: 350px;
+    }
 
-    .home-page-svg-icon{
+    .home-page-svg-icon {
       width: 200px;
       height: 200px;
       margin: auto;
+    }
+
+    #what-arroyo-does-text {
+      color: #6b7175;
     }
