@@ -4067,6 +4067,10 @@ input, select, textarea {
 		width: 75%;
 	}
 
+	.large {
+		width: 100%;
+	}
+
 /* TOC */
 	@media screen and (min-width: 750px) {
 		#toc.show {
