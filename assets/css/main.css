@@ -4044,6 +4044,10 @@ input, select, textarea {
 		margin: auto;
 	}
 
+	#case-study em {
+		background-color: var(--gray-300);
+	}
+
 /* Media */
 	figure {
 		text-align: center;
