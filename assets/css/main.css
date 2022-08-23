@@ -3996,9 +3996,21 @@ input, select, textarea {
 	#case-study h1, #case-study h2, #case-study h3  {
 		color: var(--steel-blue);
 	}
-
+	
+	#case-study h2 {
+		font-size: 2.75em;
+	}
+	
+	#case-study h3 {
+		font-size: 1.75rem;
+	}
+	
 	#case-study p {
 		color: black;
+		margin-bottom: 10px;
+		font-family: 'Roboto', sans-serif;
+		font-size: 18px;
+		line-height: 1.65;
 	}
 
 	#case-study h1:after {
