@@ -103,6 +103,16 @@
         <figcaption>Memely using Logstash to ship logs to AWS S3 and Elasticsearch</figcaption>
         <h3>The Audit</h3>
         <h4>Suspicious Client IP</h4>
+        <p>When we last left Memely, the ad agency that memely.com hosts ads from had requested that Memely investigate a suspiciously high number of user engagements that indicated an event of “click fraud”. Thanks to their new ELK Stack, Memely team was quickly able to gather information about the requests made to memely.com over the previous two weeks. Memely’s ELK Stack played an invaluable role here, and the team was quickly able to establish that one client IP address was responsible for a drastically disproportionate number of the requests made in the previous 14 days.</p>
+        <figure><img class="small case-study-image" src="images/case-study/ip_dist_donut.png" /></figure>
+        <h4>Suspicious Behavior</h4>
+        <p>In order to better understand how this client had been interacting with their site, the Memely team looked at all of the indexed web server logs involving the client’s IP address. They discovered that all of the requests issued by the client had been GET requests sent to the root page of memely.com, where the majority of the hosted ads are served. They also observed that the client made no attempts to visit any other pages within the site, which deviates from the way that most users interact with their site. At this point the Memely team is confident that they are dealing with a malicious user, reinforcing suspicions that memely.com experienced click fraud within the past 30 days.</p>
+        <figure><img class="small case-study-image" src="images/case-study/behavior_breakdown.png" /></figure>
+        <p>The next thing the Memely team would like to know is how long this has been going on. Because they only have the most recent 14 days of logs indexed in Elasticsearch, the Memely team does not currently have all of the data that they need in order to complete their audit.</p>
+        <h4>Log Rehydration</h4>
+        <p>What the Memely team needs is a way to transfer logs they currently have archived in AWS S3 back into Elasticsearch so that they can search them within an environment that is feature-rich and familiar. This process of transferring archived logs back into Elasticsearch for easier searching is often referred to as log rehydration and the Memely team has a few options at their disposal.</p>
+
+
 
 
 
