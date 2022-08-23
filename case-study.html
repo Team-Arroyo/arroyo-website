@@ -55,6 +55,48 @@
         <h2 id="section-2" class="section-heading">2. Observability</h2>
         <figure><img class="xs case-study-image" src="images/case-study/observability.png"/></figure>
         <figcaption>“To observe is to watch carefully.”</figcaption>
+        <p>Observability is the ability to measure the current state of a system using the data the system outputs. Instrumentation is adding code to output that data. The collection of these instrument measurements is called telemetry.</p>
+        <h3>The Pillars of Observability</h3>
+        <p>Observability is often said to be composed of three “pillars”: metrics, traces, and logs.</p>
+        <h4>Metrics</h4>
+        <p>Metrics provide numeric information about the state of a service at runtime. Typically, metrics are aggregations of data over a period of time.</p>
+        <p>The most commonly used metrics are availability, request rate, utilization, and latency. Availability represents the number of requests to a service that result in errors; request rate is a measure of requests per second; utilization is a numerical expression of a system’s CPU or memory usage; and latency is a measure of a system’s response time. These key metrics are often referred to as the ‘Four Golden Signals’.</p>
+        <h4>Traces</h4>
+        <p>Traces record the paths taken by individual requests through a distributed system over time. Each trace is built from multiple spans, which represent time intervals during which discrete operations occur: an API call, or a database write operation. Typically traces are represented by showing a collection of spans organized by time in a waterfall diagram or a flame graph.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/flame_graph.png" /></figure>
+        <figcaption>An example flame graph</figcaption>
+        <h4>Logs</h4>
+        <figure><img class="medium case-study-image" src="images/case-study/structured_logs.png" /></figure>
+        <figcaption>A log file in JSON format</figcaption>
+        <p>Logs are text records of events, and ideally include a timestamp. They come in various structured formats including JSON, CSV, and Common Event Format (CEF), but logs can be completely unstructured as well. Logs provide the most detailed view of what is going on within an application or service.</p>
+        <p>As a system grows, the number of metrics stays constant due to the aggregate nature of metrics. Traces increase linearly with the amount of requests; the complexity of the system does not impact the amount of traces. However, for the same increase in system complexity, the amount of logs increases faster than the number of traces or metrics.</p>
+        <h4>Scaling Logs</h4>
+        <p>Although logs are useful for gaining insight into a system, they don’t scale well. This is particularly evident in distributed systems.</p>
+        <p>Every component of a system’s architecture is likely to produce logs. When services are added to an infrastructure, those nodes will also produce more logs, which by default are stored locally. When logs are stored locally, users must first correctly identify the node containing the desired log entries. As the number of nodes increases, it rapidly becomes infeasible to identify the correct node manually.</p>
+        <p>Therefore, to find the information needed within a distributed system or with a large volume of logs, it is necessary to gather the logs into a centralized location to more efficiently perform searches and analysis there. One popular log management system is called the ELK stack, which is an acronym for the three tools it is composed of: Elasticsearch, Logstash, and Kibana.</p>
+        <h3>ELK Stack</h3>
+        <figure><img class="medium case-study-image" src="images/case-study/elk_overview.png"/></figure>
+        <figcaption>An overview of the ELK stack</figcaption>
+        <h4>Logstash</h4>
+        <figure><img class="xxs case-study-image" src="images/case-study/logstash_logo.png"/></figure>
+        <p>Logstash is a plugin-based data processing pipeline. Its functionality can be broken into three phases: input, transformation, and output. In the case of log management, Logstash takes in the text files where logs are stored (input phase); transforms these text files into a format that is more conducive to searching, like JSON (transformation phase); and sends the transformed data elsewhere for storage (output phase) In an ELK stack, the transformed data is sent to Elasticsearch.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/logstash_stages.png" /></figure>
+        <h4>Elasticsearch</h4>
+        <figure><img class="xxs case-study-image" src="images/case-study/elasticsearch_logo.png"/></figure>
+        <p>Elasticsearch is a flexible tool that can serve as a distributed document store, a real-time search engine, and an analytics engine.</p>
+        <p>Elasticsearch can be described as “real-time” because it can index incoming  data  to make the data searchable in one second. An index in Elasticsearch is like a database in a relational database management system(RDBMS). However, in contrast to a relational database, it is easy to search multiple indexes; therefore, when using Elasticsearch for logs, each day is usually given its own index.</p>
+        <p>To search indexed data, users can write queries with either a domain specific language for searching JSON files, with SQL, or with Event Query Language (EQL).  Also, searches can be run on aggregate data such as metrics. Once indexed, searchable logs are kept in Elasticsearch.</p>
+        <p>However, the more data stored in Elasticsearch, the slower searching will be. To keep searching performant , the amount of data kept in Elasticsearch must be minimized . One way of managing the data contained in Elasticsearch is by using an index lifecycle policy, which enables a high degree of control over how long an index will be retained. For example, an index may be deleted once it has been stored in Elasticsearch for a certain amount of time.</p>
+        <figure><img class="xs case-study-image" src="images/case-study/ilm.gif"/></figure>
+        <p>While searching for information can be performed via the Elasticsearch API, the search results will be presented as a JSON document. For information-rich data, such as logs, it is beneficial to visualize the data in order to understand the state of a system at a glance and make informed decisions. JSON may not succinctly summarize the results in a visually impactful format which is why the ELK stack includes a visualization tool called Kibana.</p>
+        <h4>Kibana</h4>
+        <figure><img class="xxs case-study-image" src="images/case-study/kibana_graphic.png"/></figure>
+        <p>Kibana is a  graphical user interface that lets users visualize their data by allowing them to flexibly query Elasticsearch, to create graphs, and to build custom dashboards. Visualizing information-rich data, such as logs, allows users to see what is happening within their system at a glance.</p>
+        <p>In addition, Kibana allows users to manage their Elasticsearch cluster in a more intuitive environment by allowing users to perform administrative tasks like creating index lifecycle policies in the Kibana dashboard. Otherwise, users would need to manage Elasticsearch via its API.</p>
+        <p>The ELK stack allows users to aggregate and analyze logs, and to create visualizations for application and infrastructure monitoring. Using the ELK stack for log management is a great step towards achieving an observable system, especially if it’s combined with a system for managing traces and metrics. With the three pillars of observability in mind, let’s return to Memely to see how they use their ELK Stack to collect, search, and analyze their logs.</p>
+
+
+
       </div>  
     </section>
   </div>
