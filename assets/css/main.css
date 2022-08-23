@@ -4223,3 +4223,12 @@ input, select, textarea {
     #what-arroyo-does-text {
       color: #6b7175;
     }
+
+		.case-study-footer-icon {
+			color: var(--steel-blue)
+		}
+
+		.case-study-footer-icon:hover {
+			color: var(--steel-blue);
+			transform: scale(1.2,1.2);
+		}
