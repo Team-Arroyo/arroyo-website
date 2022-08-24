@@ -4001,7 +4001,8 @@ input, select, textarea {
 	}
 
 	#case-study {
-		color: var(--gray-800)
+		color: var(--gray-800);
+		font-size: 18px;
 	}
 
 	.case-study-image {
@@ -4038,12 +4039,16 @@ input, select, textarea {
 	#case-study p {
 		margin-bottom: 10px;
 		font-family: 'Roboto', sans-serif;
-		font-size: 18px;
+		font-size: inherit;
 		line-height: 1.65;
 	}
 
 	#case-study b {
 		color: var(--gray-900)
+	}
+
+	#case-study ul {
+		font-size: inherit;
 	}
 
 	#case-study .numbered {
