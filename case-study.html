@@ -133,7 +133,7 @@
         <figure><img class="medium case-study-image" src="images/case-study/too_many_logs.png" /></figure>
         <figcaption>The Logstash S3 input plugin returns entire S3 buckets, which may be more data than is needed</figcaption>
         <p>In addition, for their audit and to reduce their impact on Elasticsearch's capacity, the Memely team may only want to rehydrate the log lines that pertain to the spammy client they identified during their preliminary audit. Unfortunately, the Logstash S3 input plugin cannot provide this level of granularity when attempting to rehydrate logs. Utilizing it will likely introduce excess data into Elasticsearch, from which the Memely team may derive little value.</p>
-        <figure><img class="large case-study-image" src="images/case-study/solution_breakdown.png" /></figure>
+        <figure><img class="medium case-study-image" src="images/case-study/solution_breakdown.png" /></figure>
         <p> Ideally, the Memely team needs a tool to rehydrate logs that is easy to use, like a commercial solution, while still integrating with their existing ELK stack to reduce monetary costs.</p>
         <p>Luckily, there is another option to consider, Arroyo. The scarcity of open-sourced rehydration tools is one of the primary reasons we decided to build Arroyo.</p>
         
