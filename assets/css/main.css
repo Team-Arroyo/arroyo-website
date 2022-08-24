@@ -4336,6 +4336,7 @@ input, select, textarea {
 		padding-top: 56.25%;
 		height: 0px;
 		position: relative;
+		margin-bottom: 15px;
 	}
 
 	.youtube-video {
