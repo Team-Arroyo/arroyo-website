@@ -4073,7 +4073,10 @@ input, select, textarea {
 	}
 
 	#case-study em {
-		background-color: var(--gray-300);
+		background-color: var(--gray-200);
+		font-style: normal;
+		padding: .2rem;
+		border-radius: 5px;
 	}
 
 	#case-study a:hover {
