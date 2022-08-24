@@ -244,41 +244,15 @@
         <figure><img class="medium case-study-image" src="images/case-study/server_sent_event.png" /></figure>
         <p>The Arroyo Client receives the notification event and then notifies the user via a toast message.</p>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <!--Engineering Decisions-->
+        <h2 id="section-8" class="section-heading">8. Engineering Decisions</h2>
+        <p>While developing Arroyo, we encountered a number of engineering challenges:</p>
+        <ul class="numbered">
+          <li>How do we make sure that we rehydrate logs without overwhelming Logstash service?</li>
+          <li>How do we ensure that Arroyo SQS queues are not blocked by any problematic messages?</li>
+          <li>How do we collect the status of a reingestion job and then notify the client of its subsequent completion?</li>
+        </ul>
+        <h3>Log Rehydration via Message buffer</h3>
 
 
 
