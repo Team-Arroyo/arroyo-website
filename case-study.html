@@ -188,7 +188,7 @@
         <figure><img class="medium case-study-image" src="images/case-study/bulk_rehydrate_high_level.png" /></figure>
         <p>The Server then fetches the names of the log files (also called keys) that fall within that date range from the user’s S3 bucket.</p>
         <figure><img class="medium case-study-image" src="images/case-study/file_fetching.png" /></figure>
-        <p>The Server sends these keys to the Arroyo Client, which displays the file names to the user. The user may select the files that they would like to have rehydrated. Once the user clicks Ingest Selected Files, the Client forwards the selected file names to the Arroyo Server for rehydration.</p>
+        <p>The Server sends these keys to the Arroyo Client, which displays the file names to the user. The user may select the files that they would like to have rehydrated. Once the user clicks <em>Ingest Selected Files</em>, the Client forwards the selected file names to the Arroyo Server for rehydration.</p>
         <figure><img class="large case-study-image" src="images/case-study/bulk_rehydrate.gif" /></figure>
         <h4>Query-based Log Rehydration</h4>
         <p>If the user decides to submit query-based rehydration, they may specify up to two log attributes and their corresponding values (a query) in addition to a date range. Once the user submits their rehydration request, the Client forwards the date range with the query to the Arroyo Server for rehydration.</p>
@@ -256,7 +256,7 @@
         <p>To re-ingest logs from an Amazon S3 bucket, Logstash can be configured to access the bucket directly and re-ingest all the logs it contains. An input plugin allows Logstash to read a log event from a specific event source. For example, with the S3 input plugin, the S3 bucket is set as the event source.</p>
         <figure><img class="medium case-study-image" src="images/case-study/s3_input_plugin.png" /></figure>
         <p>Using the S3 input plugin for our use case can be problematic because we do not need to re-ingest the entire bucket contents. This plugin does not allow us to specify files in the S3 bucket that we want to ingest into Logstash. 
-          We need to be able to re-ingest only the logs that fall within the provided date range or the logs that fall within the provided date range and contain the keywords provided by the user. One way to achieve that is to use an HTTP input plugin. HTTP plugin allows Logstash to accept logs via HTTP or HTTPS. 
+          We need to be able to re-ingest only the logs that fall within the provided date range or the logs that fall within the provided date range and contain the keywords provided by the user. One way to achieve that is to use the Logstash HTTP input plugin which allows Logstash to accept logs via HTTP or HTTPS. 
         </p>
         <figure><img class="medium case-study-image" src="images/case-study/arroyo_to_logstash.png" /></figure>
         <p>With the HTTP input plugin, we could send each rehydrated log or a whole log file as a POST request. However, there is a problem with this approach. 
@@ -270,7 +270,7 @@
         <p>The first solution we came up with was introducing Kafka into our architecture.</p>
         <p>Apache Kafka is a publish-subscribe messaging system. Kafka would serve as the middleman between the Arroyo application and the user's ELK stack.</p>
         <figure><img class="medium case-study-image" src="images/case-study/arroyo_to_kaftka.png" /></figure>
-        <p>To integrate Kafka, we would have to create and deploy a Kafka Producer and a Kafka Broker and configure the Logstash Kafka input plugin so that Logstash can accept Kafka events.</p>
+        <p>To integrate Kafka, we would have to create and deploy a Kafka Producer, a Kafka Broker, and configure the Logstash Kafka input plugin so that Logstash can accept Kafka events.</p>
         <p>The Kafka Producer would be responsible for publishing logs as events to the Kafka topic. The Producer can either be a part of the Arroyo Server or a standalone application.</p>
         <p>The Kafka Broker is a Kafka server that would be responsible for receiving and queueing the log data. We would also have to provision a separate server, most likely an Amazon EC2 instance, to host the Kafka Broker.</p>
         <p>If we were to incorporate Kafka into our architecture, we would be able to have complete control over which logs are ingested and also ensure that the Rehydration and Reingestion layers are decoupled from the Arroyo Server logic.</p>
@@ -299,7 +299,7 @@
         <p>A DLQ ensures that the main queue is not blocked and can recover quickly. If Lambda is unable to process the messages that are on the main queue, the messages are automatically transferred to the Dead Letter Queue.</p>
         <p>With Dead-letter Queues, developers can configure alarms to signal when messages are transferred to a Dead Letter Queue, indicating that some error has occurred. Then they could attempt to reprocess the messages by redirecting them back to the main queue or examine logs to investigate what has caused the message processing to fail.</p>
         <h3>Notifying the Client</h3>
-        <p>While developing Arroyo, we needed to ensure that the Client has visibility into the status of reingestion tasks and is notified of a task’s completion.</p>
+        <p>While developing Arroyo, we needed to ensure that the Client has visibility into the status of rehydration tasks and is notified of a task’s completion.</p>
         <p>To achieve that, we needed to access the result of each POST request sent to Logstash, combine the results of all requests, and pass them to the Arroyo application.</p>
         <h4>Possible Solution: Webhook</h4>
         <p>The first solution we considered involved setting up a webhook.</p>
