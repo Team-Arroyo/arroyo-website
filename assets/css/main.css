@@ -2867,8 +2867,8 @@ input, select, textarea {
 	}
 
 		ul.menu > li {
-			border-left: solid 1px rgba(255, 255, 255, 0.15);
-			display: inline-block;
+			/* border-left: solid 1px rgba(255, 255, 255, 0.15); */
+			/* display: inline-block; */
 			line-height: 1;
 			margin-left: 1.5em;
 			padding: 0 0 0 1.5em;
@@ -3555,20 +3555,27 @@ input, select, textarea {
 		}
 
 	#footer > .inner a {
-		border-bottom-color: rgba(255, 255, 255, 0.15);
+		/* border-bottom-color: rgba(255, 255, 255, 0.15); */
 	}
 
 		#footer > .inner a:hover {
-			border-bottom-color: transparent;
+			/* border-bottom-color: transparent; */
 		}
 
 	#footer > .inner .menu {
 		font-size: 0.8em;
 		color: rgba(255, 255, 255, 0.94);
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: flex-start;
 	}
 
 	#header + #wrapper + #footer > .inner {
 		margin: 0 auto;
+	}
+
+	#footer li {
+		margin: 0 1rem;
 	}
 
 /* Sidebar */
@@ -4309,6 +4316,11 @@ input, select, textarea {
       color: #6b7175;
     }
 
+		.case-study-footer-list ul {
+			background-color: orange;
+			display: flex;
+			justify-content: center;
+		}
 		.case-study-footer-icon {
 			color: var(--steel-blue)
 		}
