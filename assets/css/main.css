@@ -4005,19 +4005,12 @@ input, select, textarea {
 		font-size: 18px;
 	}
 
-	.case-study-image {
-		margin: 40px;
-		margin-bottom: 10px;
-		margin-left: auto;
-		margin-right: auto;
-		display: block;
-	}
-
 	figcaption {
 		text-align: center;
 		margin: 10px 0 10px 0;
 		font-style: italic;
 		font-size: 16px;
+		margin-top: 0px;
 	}
 
 	#case-study h1, #case-study h2, #case-study h3, #case-study h4  {
@@ -4065,6 +4058,7 @@ input, select, textarea {
 		display: inline-block;
 		margin-inline-start: 0px;
 		margin-inline-end: 0px;
+		margin-bottom: 15px;
 	}
 
 	#case-logo {
