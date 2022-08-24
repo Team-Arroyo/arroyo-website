@@ -37,799 +37,336 @@
     <section id="case-study" class="wrapper style1">
       <div class="inner">
         <h1 class="major">Case Study</h1>
-        <span class="image fit"><img id="case-logo" src="images/logos/color/arroyographic_color.svg" alt="" /></span>
-        <p class="c53 c58 title" id="h.jp0xgnj2fn3h"><span class="c0 c39">Arroyo Case Study</span></p>
-        <h1 class="c6" id="section-1"><span class="c48 c65">1. </span><span class="c48">Introduction</span></h1>
-        <p class="c12"><span>As systems become increasingly complex</span><sup><a href="#cmnt1"
-              id="cmnt_ref1">[a]</a></sup><sup><a href="#cmnt2" id="cmnt_ref2">[b]</a></sup><span class="c2 c0">, it
-            becomes
-            more important - and simultaneously more difficult - to understand what is going on within them. The ability
-            to
-            monitor such systems and efficiently access specific information about them is vital.</span></p>
-        <p class="c12"><span class="c2 c0">&lt;Continue intro-ing here?&gt;</span></p>
-        <h2 class="c1 c29" id="h.776zvxylucft"><span class="c22 c0"></span></h2>
-        <h2 class="c1" id="h.39yhquwvqukz"><span class="c3 c0">Arroyo</span></h2>
-        <p class="c7"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 568.57px; height: 392.83px;"><img
-              alt="" src="images/image23.jpg"
-              style="width: 568.57px; height: 392.83px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c12"><span class="c2 c0">An arroyo is a creek bed or gulch that temporarily or seasonally fills with
-            water
-            after sufficient rain. </span></p>
-        <p class="c12"><span>Somewhat similarly, Arroyo is a lightweight framework that performs rehydration, granularly
-            rehydrating logs kept in cloud storage.</span></p>
-        <h2 class="c1 c29" id="h.90gepc7k94hw"><span class="c22 c0"></span></h2>
-        <h2 class="c1" id="h.u1y6ehmfzmkw"><span class="c3 c0">Memely</span></h2>
-        <p class="c12"><span class="c2 c0">To help illustrate what Arroyo is and why it is useful, let&rsquo;s meet
-            Memely.
-          </span></p>
-        <p class="c12"><span class="c2 c0">Memely is a small image and video hosting service that strives to provide a
-            &ldquo;one-stop shop for non-stop laughs&rdquo; by consolidating &nbsp;the most popular content being shared
-            across the web into one place. </span></p>
-        <p class="c7"><span
-            style="overflow: hidden; display: inline-block; margin: -0.00px -0.00px; border: 2.67px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 403.50px; height: 380.35px;"><img
-              alt="" src="images/image15.png"
-              style="width: 403.50px; height: 380.35px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c12"><span class="c16">Memely.com</span><span class="c2 c0">&nbsp;was not an overnight sensation, but
-            over
-            time their user base has grown considerably, exceeding even their most ambitious predictions. This growth
-            enabled
-            the Memely team to start generating pay-per-click ad revenue by hosting ads on their front page. With time,
-            these
-            profits became consistent and substantial enough that Memely was able to reinvest in their site by hiring a
-            small
-            team of full-time developers.</span></p>
-        <p class="c12"><span class="c2 c0">The engineering team&rsquo;s first priority was to scale the Memely
-            architecture to
-            accommodate their growing user base. During the initial phase of infrastructural scaling, the complexity of
-            Memely&rsquo;s system increased considerably, and it quickly became clear that the current system did not
-            contain
-            the level of observability required to continue scaling confidently. </span></p>
-        <p class="c12"><span class="c2 c0">To complicate matters further, some troubling user behavior has necessitated
-            an
-            audit. The ad agency which Memely&rsquo;s site hosts ads from is concerned about possible &ldquo;click
-            fraud&rdquo;. Over the past month the number of clicks, or &ldquo;user engagements&rdquo;, &nbsp;with the
-            ads the
-            agency generates and that memely.com hosts were far higher than usual. The agency has asked that the Memely
-            team
-            investigate: no small feat in Memely&rsquo;s increasingly complex infrastructure.</span></p>
-        <hr>
-        <p class="c8"><span class="c2 c0"></span></p>
-        <h1 class="c1" id="section-2"><span>2. Observability</span></h1>
-        <p class="c31 c53"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 313.00px; height: 313.00px;"><img
-              alt="" src="images/image17.png"
-              style="width: 313.00px; height: 313.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c31 c53"><span class="c55 c16 c0">&ldquo;To observe is to watch carefully.&rdquo; </span></p>
-        <p class="c23"><span class="c0">Observability is the ability to measure the current state of a system using the
-            data
-            the system outputs. Instrumentation is adding code to output the data. </span><span class="c0">Data emitted
-            by the
-            system is called telemetry.</span><sup><a href="#cmnt3" id="cmnt_ref3">[c]</a></sup></p>
-        <h2 class="c1 c29" id="h.6vdqssxgcpjy"><span class="c22 c0"></span></h2>
-        <h2 class="c1" id="h.681275l05qb4"><span class="c3 c0">The Three Pillars</span></h2>
-        <p class="c23"><span class="c2 c0">The data types used in observability are metrics, traces, and logs.</span>
-        </p>
-        <h3 class="c1" id="h.uqz27g9oi4js"><span class="c14">Metrics</span></h3>
-        <p class="c12"><span class="c2 c0">Metrics provide information about the state of a service at runtime.
-            Typically,
-            metrics are aggregations of data over a period of time. </span></p>
-        <p class="c12"><span class="c2 c0">The most commonly used metrics are availability, request rate, utilization,
-            and
-            latency. They are often referred to as the four golden signals. The first signal, availability, is the
-            percentage
-            of requests that have errors, and the request rate is the number of requests per second. Utilization can be
-            measured by the CPU usage of a system or by the available memory of a system. Finally, the overall response
-            time
-            of a system is latency. </span></p>
-        <h3 class="c1" id="h.5d5hxkq2avu9"><span class="c14">Traces</span></h3>
-        <p class="c23"><span class="c2 c0">Traces record the paths taken by a request through a distributed system.
-            Traces are
-            built from multiple spans. A span is a timestamped logical unit of work like an API call or a database write
-            operation. Typically traces are represented by showing a collection of spans organized by time in a
-            waterfall
-            diagram or a flame graph. </span></p>
-        <p class="c31 c53"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 516.00px; height: 367.68px;"><img
-              alt="" src="images/image18.png"
-              style="width: 516.00px; height: 367.68px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <h3 class="c1" id="h.z20auma9dxu6"><span class="c14">Logs</span></h3>
-        <p class="c23"><span class="c0">Logs are text records of events, ideally with a timestamp. They can be in
-            various
-            formats, such as CSV, JSON, key-value pair, Common Event Format (CEF), plain text, </span><span
-            class="c54"><a class="c33"
-              href="https://www.google.com/url?q=http://www.ietf.org/rfc/rfc5424.txt&amp;sa=D&amp;source=editors&amp;ust=1660232264656747&amp;usg=AOvVaw1LzyhO2mzM6SzB4uLxh7IU">RFC
-              5424</a></span><span class="c0">, and</span><span class="c54"><a class="c33"
-              href="https://www.google.com/url?q=http://www.ietf.org/rfc/rfc3164.txt&amp;sa=D&amp;source=editors&amp;ust=1660232264656978&amp;usg=AOvVaw2XLTRsbSRPOwEoX5sjNQ6Q">&nbsp;RFC
-              3164</a></span><span class="c2 c0">. Conversely, logs can also be completely unstructured. </span></p>
-        <p class="c23"><span class="c2 c0">Developers can use a library like Winston or custom-written code for log
-            instrumentation.</span></p>
-        <p class="c23"><span class="c2 c0">Usually, because logs are the most detailed view of what is going on within a
-            given
-            application, logs are helpful for both troubleshooting and audits. </span></p>
-        <h3 class="c1" id="h.10zpsl3qzsuo"><span class="c14">Scaling Logs</span></h3>
-        <p class="c23"><span class="c2 c0">However, logs don&rsquo;t scale well. As the log volume increases, it can be
-            challenging to find the needed information. Finding information in a distributed system can be
-            time-consuming as
-            you may have to comb through many log files from various applications and nodes individually. </span></p>
-        <p class="c23"><span class="c2 c0">To find the information you need with a large log volume, you would need a
-            way to
-            gather the logs into a centralized location, search the centralized logs, and analyze the results of the
-            search.
-            One popular log management system uses Elasticsearch, Logstash, and Kibana together. This combination is
-            called
-            the ELK stack.</span></p>
-        <h2 class="c1 c29" id="h.ig60pa39uxp0"><span class="c22 c0"></span></h2>
-        <h2 class="c1" id="h.um9tjiu5r29"><span class="c3 c0">ELK Stack</span></h2>
-        <h3 class="c1" id="h.iuevmq4jf3nd"><span>Logstash</span></h3>
-        <p class="c12"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 94.76px; height: 94.76px;"><img
-              alt="" src="images/image20.png"
-              style="width: 94.76px; height: 94.76px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c23"><span class="c2 c0">Logstash is a data collection engine with real-time pipelining capabilities.
-            Logstash has three stages to it. First, events are generated at the input stage. For log management, this
-            means
-            the text files where logs are stored. Next are filters, where the inputs are modified or transformed. In
-            this
-            case, we will convert the text files into JSON. Finally, there are outputs. Modified inputs are shipped to
-            the
-            specified output. We will send the JSON files to Elasticsearch. </span></p>
-        <h3 class="c1" id="h.bwp7ao6us04y"><span class="c14">Elasticsearch</span></h3>
-        <p class="c12"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 96.78px; height: 96.78px;"><img
-              alt="" src="images/image6.png"
-              style="width: 96.78px; height: 96.78px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c23"><span class="c2 c0">Elasticsearch is a distributed document store, a real-time search engine, and
-            an
-            analytics engine. </span></p>
-        <p class="c23"><span class="c2 c0">Each Elasticsearch cluster has many nodes for increased reliability, so
-            Elasticsearch is distributed. Elasticsearch will store serialized JSON files as complex data.</span></p>
-        <p class="c23"><span>Additionally,</span><span class="c0">&nbsp;as</span><span class="c2 c0">&nbsp;a search
-            engine,
-            Elasticsearch will index incoming documents in under a second using reverse indexing. Reverse indexing
-            allows for
-            a fast search. Also, Elasticsearch allows for SQL-like queries and full-text searches, plus complex queries
-            that
-            combine both search SQL-like queries and full-text searches.</span></p>
-        <p class="c23"><span class="c2 c0">Finally, as an analytics engine, Elasticsearch allows for complex data
-            summaries to
-            find critical metrics, patterns, and trends.</span></p>
-        <h3 class="c1" id="h.g66l39vusu8"><span class="c14">Kibana</span></h3>
-        <p class="c12"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 97.78px; height: 97.78px;"><img
-              alt="" src="images/image22.png"
-              style="width: 97.78px; height: 97.78px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c23"><span class="c0">Kibana is a collection of graphical user interface applications that wrap around
-            Elasticsearch. Inside Kibana, </span><span class="c0">the Discovery application</span><span
-            class="c0">&nbsp;can
-            be used to perform queries using Kibana Query Language.</span><span class="c0">&nbsp;Users can create charts
-            and
-            graphs using Kibana Lens</span><span class="c2 c0">, while Kibana Dashboard is used to create dashboards.
-            Finally,
-            you can use Kibana to manage the ELK stack.</span></p>
-        <p class="c23"><span class="c0">Let&rsquo;s return to Memely to see how they use their ELK Stack.</span></p>
-        <hr>
-        <p class="c8"><span class="c2 c0"></span></p>
-        <h1 class="c1" id="section-3"><span class="c15 c0">3. Log Rehydration</span></h1>
-        <h2 class="c1" id="h.1ksznyb7khwk"><span class="c3 c0">Memely&rsquo;s ELK Stack</span></h2>
-        <p class="c12"><span class="c2 c0">After implementing an ELK stack of their own, the Memely team feels more
-            confident
-            about continuing with their scaling efforts. Additionally, implementing a centralized logging pipeline has
-            proven
-            to be an invaluable tool within the team&#39;s observability arsenal.</span></p>
-        <p class="c12"><span class="c2 c0">However, implementing an ELK stack has introduced a separate set of
-            challenges for
-            the Memely team. Elasticsearch&#39;s strength is fast searching, but the search speed slows as the number of
-            documents increases. Additionally, increasing the number of documents introduces significant complexity to
-            maintaining Memely&#39;s Elasticsearch cluster.</span></p>
-        <p class="c12"><span class="c2 c0">To address these challenges, the Memely team decides to store their logs in
-            two
-            locations. First, Memely will ship their logs to AWS S3 for archival storage. Secondly, Memely will index
-            only the
-            most recent 14 days&#39; worth of logs into Elasticsearch. In addition to saving money, this solution
-            reduces the
-            number of documents stored in Elasticsearch and grants the Memely team peace of mind knowing all their logs
-            are
-            archived in secure cloud storage.</span></p>
-        <h2 class="c53 c29 c57" id="h.5deia7c3q4i9"><span class="c22 c0"></span></h2>
-        <h2 class="c57 c53" id="h.mcz6mixxpprr"><span class="c3 c0">The Audit</span></h2>
-        <h3 class="c1" id="h.otb04fuu4qvn"><span class="c14">Suspicious Client IP</span></h3>
-        <p class="c12"><span>When the ad agency expressed concerns about possible click fraud, the Memely team was
-            quickly
-            able to gather information about the requests made to </span><span class="c16">memely.com</span><span
-            class="c2 c0">&nbsp;over the previous two weeks. Memely&rsquo;s ELK Stack played an invaluable role here,
-            and the
-            team was quickly able to establish that one client IP address was responsible for a drastically
-            disproportionate
-            number of the requests made in the previous 14 days.</span></p>
-        <p class="c7"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 555.24px; height: 366.77px;"><img
-              alt="" src="images/image14.png"
-              style="width: 566.79px; height: 371.25px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <h3 class="c1" id="h.toq8w34y5ywx"><span class="c14">Suspicious Behavior</span></h3>
-        <p class="c12"><span>In order to better understand how this client had been interacting with their site, the
-            Memely
-            team looked at all of the indexed web server logs involving the client&rsquo;s IP address. They discovered
-            that
-            all of the requests issued by the client had been GET requests sent to the root page of memely.com, where
-            the
-            majority of the hosted ads are served. They also observed that the client made no attempts to visit any
-            other
-            pages within the site, which deviates from the way that most users interact with their site. At this point
-            the
-            Memely team is confident that they are dealing with a malicious user, reinforcing suspicions that
-          </span><span class="c16">memely.com </span><span class="c2 c0">experienced click fraud within the past 30
-            days.</span></p>
-        <p class="c7"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 590.59px; height: 376.31px;"><img
-              alt="" src="images/image16.png"
-              style="width: 590.59px; height: 386.54px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c12"><span>The next thing the Memely</span><span class="c2 c0">&nbsp; team would like to know is how
-            long
-            this has been going on. Because they only have the most recent 14 days of logs indexed in Elasticsearch, the
-            Memely team does not currently have all of the data that they need in order to complete their audit.</span>
-        </p>
-        <h2 class="c1 c29" id="h.3twhmp1xtu9h"><span class="c22 c0"></span></h2>
-        <h2 class="c1" id="h.kn7c135526iq"><span class="c3 c0">Log Rehydration</span></h2>
-        <p class="c12"><span class="c2 c0">What the Memely team needs is a way to transfer logs they currently have
-            archived
-            in AWS S3 back into Elasticsearch so that they can search them within an environment that is feature-rich
-            and
-            familiar. This process of transferring archived logs back into Elasticsearch for easier searching is often
-            referred to as log &ldquo;rehydration&rdquo; and the Memely team has a few options at their disposal.</span>
-        </p>
-        <hr>
-        <p class="c8"><span class="c2 c0"></span></p>
-        <h1 class="c1" id="section-4"><span class="c15 c0">4. Existing Solutions</span></h1>
-        <h2 class="c1" id="h.gpbvwoneax3i"><span class="c3 c0">Commercial Solutions</span></h2>
-        <p class="c12"><span class="c2 c0">There is no shortage of commercially available observability solutions
-            offering log
-            rehydration. They all boast a multitude of features, and are all all-in-one solutions, meaning that users do
-            not
-            need to concern themselves with scaling complexities or infrastructure management. &nbsp;</span></p>
-        <p class="c12"><span class="c24 c16 c0">&lt;insert pic of commercial options here&gt;</span></p>
-        <p class="c12"><span>While a commercial solution is an option the Memely team could explore, they have
-            reservations
-            about the costs associated, the possible added complexity, and the time it may take to get up to speed with
-            an
-            unfamiliar new tool while trying to complete their audit. The Memely team would like to avoid paying for
-            features
-            they don&rsquo;t need, and they really want to avoid the hassle of having to relocate their log data.
-          </span></p>
-        <h2 class="c1 c29" id="h.uwytpcmwf5or"><span class="c22 c0"></span></h2>
-        <h2 class="c1" id="h.pb18rrp1v04r"><span class="c3 c0">DIY Solutions</span></h2>
-        <p class="c12"><span class="c2 c0">If a commercial solution doesn&rsquo;t quite fit Memely&rsquo;s needs, there
-            are
-            many open-source tools and plugins available to help Memely achieve their objectives. The main benefit of a
-            DIY
-            solution is that the Memely team could continue to use their existing ELK Stack and log archival solution.
-            Additionally, a DIY solution would help minimize costs.</span></p>
-        <p class="c12"><span class="c2 c0">Because the Memely team is still relatively small, they may not have the time
-            and
-            resources to devote to researching all of the available tools they could employ to build a rehydration tool
-            in-house.</span></p>
-        <p class="c12"><span>The scarcity of turn-key, free rehydration tools is one of the primary reasons we decided
-            to
-            build Arroyo. </span><span>While both the commercial and DIY approaches are valid solutions, </span><sup><a
-              href="#cmnt4" id="cmnt_ref4">[d]</a></sup></p>
-        <hr>
-        <p class="c8"><span class="c2 c0"></span></p>
-        <h1 class="c1" id="section-5"><span class="c15 c0">5. Arroyo</span></h1>
-        <p class="c12"><span>Arroyo is a lightweight framework that facilitates the granular rehydration of logs. In
-            addition,
-          </span><span>arroyo</span><sup><a href="#cmnt5" id="cmnt_ref5">[e]</a></sup><span>&nbsp;allows users to
-            specify a
-            specific timeframe to search for relevant log files. Arroyo also supports providing log attributes so users
-            can
-            conditionally rehydrate logs for more granular control over their ability to search. Search results are
-            retrieved
-            from a user&#39;s S3 bucket and reingested into Elasticsearch.</span></p>
-        <hr>
-        <p class="c8"><span class="c2 c0"></span></p>
-        <h1 class="c1" id="section-6"><span>6. Using Arroyo</span></h1>
-        <h2 class="c1" id="h.a8e85spaif40"><span class="c3 c0">Installation</span></h2>
-        <p class="c12"><span>Users will need to clone the deployment repo, install dependencies, and create a .env file.
-          </span></p>
-        <h2 class="c1" id="h.aaq0qp6p1voq"><span class="c3 c0">Deployment</span></h2>
-        <p class="c12"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 843.02px; height: 384.79px;"><img
-              alt="" src="images/image10.gif"
-              style="width: 843.02px; height: 384.79px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <h4 class="c46" id="h.9ues041354pd"><span class="c35">To deploy AWS infrastructure</span></h4>
-        <p class="c12"><span class="c2 c0">npm run deploy</span></p>
-        <h2 class="c1" id="h.tdd73estpchp"><span class="c3 c0">Launching Arroyo</span></h2>
-        <p class="c12"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 843.02px; height: 384.79px;"><img
-              alt="" src="images/image13.gif"
-              style="width: 843.02px; height: 384.79px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <h4 class="c46" id="h.em32b26dj7vl"><span class="c35">To start Arroyo for the first time</span></h4>
-        <p class="c12"><span class="c2 c0">docker compose-up</span></p>
-        <h4 class="c46" id="h.jruljltqgtme"><span class="c35">To restart Arroyo from a previously used Docker
-            container</span>
-        </h4>
-        <p class="c12"><span class="c2 c0">docker compose start</span></p>
-        <h2 class="c1" id="h.wyyt7443fvva"><span class="c3 c0">Shutting Down</span></h2>
-        <h4 class="c46" id="h.4g1pagqimgy7"><span class="c35">To stop Arroyo</span></h4>
-        <p class="c12"><span class="c2 c0">docker compose stop</span></p>
-        <h4 class="c46" id="h.npovixahctki"><span class="c35">To stop Arroyo and remove containers and docker
-            network</span>
-        </h4>
-        <p class="c12"><span class="c2 c0">docker compose down</span></p>
-        <h2 class="c1" id="h.xxmp5pgqf4n"><span class="c3 c0">Teardown</span></h2>
-        <p class="c12"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 843.02px; height: 384.79px;"><img
-              alt="" src="images/image19.gif"
-              style="width: 843.02px; height: 384.79px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <h4 class="c46" id="h.2ug1j5o9r4ra"><span class="c35">To destroy AWS infrastructure:</span></h4>
-        <p class="c12"><span>npm run destroy</span></p>
-        <h2 class="c18" id="h.3txk55qk73jh"><span class="c40 c0">Rehydration</span></h2>
-        <p class="c18"><span class="c2 c0">There are two ways to rehydrate logs using Arroyo. The first method, bulk
-            rehydration, allows users to re-ingest whole log files. The second method, query rehydration, will enable
-            users to
-            re-ingest only relevant log entries instead of entire log files. Query rehydration saves space in
-            Elasticsearch.
-          </span></p>
-        <p class="c18 c21"><span class="c2 c0"></span></p>
-        <h2 class="c18" id="h.gjfi4z2tt0ko"><span class="c0 c40">Bulk Rehydration</span></h2>
-        <p class="c18"><span class="c2 c0">To start bulk re-ingestion, click on the `By Date Range` tab and enter a
-            start date
-            and an end date. Then, click on the `Select Log Files` button. A list of matching files will populate in the
-            `Select` section. Choose the files to be re-ingested and click `Select Ingested Files`. Once notification of
-            job
-            completion is received, the ingested logs will be available in Kibana.</span></p>
-        <p class="c8"><span class="c2 c0"></span></p>
-        <p class="c12"><img></p>
-        <h2 class="c1 c29" id="h.7bn6iuqw5qui"><span class="c22 c0"></span></h2>
-        <h2 class="c18" id="h.f3xf3rxgjdji"><span class="c40 c0">Query Rehydration</span></h2>
-        <p class="c18"><span class="c2 c0">To start query re-ingestion, click on the `By Search Term` tab and enter
-            start and
-            end dates. Next, enter a log attribute (request_method) and the log attribute value ( GET) and click the +
-            button.
-            Users can enter up to two pairs of log attributes and log attribute values. Finally, click on `Ingest
-            Matching Log
-            Entries to start re-ingestion. Once notification of re-ingestion is received, the ingested log entries will
-            be
-            available in Kibana.</span></p>
-        <p class="c8"><span class="c2 c0"></span></p>
-        <p class="c12"><img></p>
-        <h2 class="c1" id="h.5jo4vhuh41tg"><span class="c3 c0">Index Cleanup</span></h2>
-        <p class="c12"><span class="c2 c0">One of the challenges with using Elasticsearch is striking a balance between
-            having
-            too much information on hand and too little information. Arroyo reintroduces data into Elasticsearch,
-            leading to
-            questions surrounding data management. For example, how can users remove rehydrated data once they have
-            derived
-            its value?</span></p>
-        <p class="c12"><span class="c2 c0">Arroyo&#39;s proposed solution to these questions is to provide users with a
-            Logstash configuration template that they can utilize to set up their http input plugin. In addition, the
-            provided
-            template instructs Elasticsearch to create a new, separate index for rehydrated logs generated by
-            Arroyo.</span>
-        </p>
-        <p class="c12"><span class="c2 c0">Creating a new index allows users to delete the entire index and any
-            rehydrated
-            logs without deleting day-to-day logs. Our team designed Arroyo to integrate into a user&#39;s existing ELK
-            stack,
-            and our application mustn&#39;t interfere with a user&#39;s existing workflow.</span></p>
-        <p class="c12"><span class="c2 c0">The http input template Arroyo provides is a guideline, but users are
-            encouraged to
-            configure Logstash&#39;s http input to suit their use case.</span></p>
-        <p class="c12"><span class="c2 c0">For ease of data management, we encourage users to follow Arroyo&#39;s
-            pattern of
-            creating a new index for rehydration purposes.</span></p>
-        <p class="c12"><img></p>
-        <hr>
-        <p class="c8"><span class="c2 c0"></span></p>
-        <h1 class="c1" id="section-7"><span class="c15 c0">7. Arroyo Architecture</span></h1>
-        <h3 class="c1" id="h.jr9rjji2nfut"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 776.70px; height: 491.52px;"><img
-              alt="" src="images/image7.png"
-              style="width: 776.70px; height: 491.52px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></h3>
-        <p class="c4"><span class="c10 c0">Arroyo application consists of Arroyo Client and Arroyo Server. Arroyo Client
-            is a
-            React application that provides the Arroyo UI. Arroyo Server is a Node application that interacts with AWS
-            resources and facilitates rehydration and reingestion of logs.</span></p>
-        <p class="c4"><span class="c25">Both, Arroyo Client and Arroyo Server, are run in a Docker container. Arroyo
-            Client
-            and Arroyo Server are built from two separate </span><span class="c25">docke</span><sup><a href="#cmnt6"
-              id="cmnt_ref6">[f]</a></sup><span class="c10 c0">r images and are run using docker compose.</span></p>
-        <p class="c4"><span class="c10 c0">Let&rsquo;s go over AWS services that Arroyo uses to perform the rehydration
-            of
-            logs.</span></p>
-        <p class="c23 c21"><span class="c32 c0"></span></p>
-        <h2 class="c1" id="h.fys8my9fcq3x"><span class="c3 c0">Arroyo AWS Resources</span></h2>
-        <p class="c4"><span class="c25">During the installation, Arroyo </span><span class="c25">provisions</span><span
-            class="c10 c0">&nbsp;a number of &nbsp;AWS resources. This is done programmatically using AWS SDK. </span>
-        </p>
-        <p class="c4"><span class="c25">Arroyo provisions Rehydration SQS Queue and Status SQS Queue as well as their
-            corresponding </span><span class="c25">Dead Letter Queues. Having DLQ</span><sup><a href="#cmnt7"
-              id="cmnt_ref7">[g]</a></sup><span class="c10 c0">&nbsp;associated with each of the main queues ensures
-            easier
-            troubleshooting and also makes sure that the queues are not blocked in case of a message failure. </span>
-        </p>
-        <p class="c4"><span class="c10 c0">Arroyo creates a separate S3 bucket to host the Lambda deployment
-            package.</span>
-        </p>
-        <p class="c4"><span class="c10 c0">In addition to that, Arroyo also creates an IAM role for Lambda Function. To
-            make
-            sure that Lambda is able to interact with other AWS services, we attach several permissions to the role.
-          </span>
-        </p>
-        <p class="c4"><span class="c10 c0">Lastly, Arroyo creates the Lambda Function itself and sets the Rehydration
-            SQS
-            Queue as its Event trigger. </span></p>
-        <p class="c12"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 745.41px; height: 430.21px;"><img
-              alt="" src="images/image3.png"
-              style="width: 745.41px; height: 430.21px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c4 c21"><span class="c10 c0"></span></p>
-        <p class="c4"><span class="c10 c0">Conceptually we can split Arroyo application into three key phases:
-            Rehydrate,
-            Reingest, and Notify. Let&rsquo;s take a look at each of them.</span></p>
-        <p class="c4 c21"><span class="c0 c49"></span></p>
-        <h2 class="c1" id="h.73bkhqh5867t"><span class="c3 c0">Rehydrate</span></h2>
-        <p class="c12"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 718.44px; height: 328.67px;"><img
-              alt="" src="images/image21.png"
-              style="width: 763.05px; height: 429.38px; margin-left: -9.01px; margin-top: -8.33px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c4"><span class="c25">During the Rehydrate phase Arroyo receives the request containing </span><span
-            class="c25">the file names</span><sup><a href="#cmnt8" id="cmnt_ref8">[h]</a></sup><span
-            class="c10 c0">&nbsp;that
-            need to be rehydrated either fully or via a query, performs the rehydration itself, and then forwards the
-            result
-            to the next phase. </span></p>
-        <p class="c4"><span class="c25">During the Rehydrate phase</span><sup><a href="#cmnt9"
-              id="cmnt_ref9">[i]</a></sup><span class="c10 c0">&nbsp;the user first submits the rehydration request via
-            Arroyo
-            Client. Arroyo Client then forwards the request to the Arroyo Server. The request contains names of the
-            files to
-            be rehydrated as well as some additional data needed to process it. </span></p>
-        <p class="c4"><span class="c10 c0">For each file that needs to be rehydrated, Arroyo Server sends a message to
-            the
-            Rehydration SQS Queue. Within the body of the message the Server includes information about </span></p>
-        <ul class="c42 lst-kix_1o1htudhomlf-0 start">
-          <li class="c23 c26"><span class="c37">S3 Bucket name</span><span class="c10 c0">&nbsp;where logs are
-              stored</span>
-          </li>
-          <li class="c23 c26"><span class="c37">Key</span><span class="c10 c0">&nbsp;that represents the name of the
-              file to
-              be queried or fetched</span></li>
-          <li class="c23 c26"><span class="c37">Logstash endpoint</span><span class="c10 c0">&nbsp;where the rehydrated
-              logs
-              will be forwarded to</span></li>
-          <li class="c23 c26"><span class="c37">SQL expression</span><span class="c10 c0">&nbsp;which is optional and
-              will
-              only be included if the user chooses to perform a query instead of rehydrating the whole file</span></li>
+        <!--Intro-->
+        <h2 id="section-1" class="section-heading">1. Introduction</h2>
+        <p>As systems become increasingly complex, it becomes more important - and simultaneously more difficult - to understand what is going on within them. The ability to monitor such systems and efficiently access specific information about them is vital.</p>
+        <h3>Arroyo</h3>
+        <p>An arroyo is a creek bed or gulch that temporarily fills with water after sufficient rain.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/dry_creek.jpg" /></figure>
+        <p>Arroyo is a lightweight framework that granularly rehydrates logs kept in cloud storage.</p>
+        <h3>Memely</h3>
+        <p>To help illustrate what Arroyo is and why it is useful, let’s meet Memely.</p>
+        <p>Memely is a small image and video hosting service that strives to provide a “one-stop shop for non-stop laughs” by consolidating the most popular content being shared across the web into one place.</p>
+        <figure><img class="small case-study-image" src="images/case-study/memely_intro.png" /></figure>
+        <p>Memely.com was not an overnight sensation, but over time their user base has grown considerably, exceeding even their most ambitious predictions. This growth enabled the Memely team to start generating pay-per-click ad revenue by hosting ads on their front page. With time, these profits became consistent and substantial enough that Memely was able to reinvest in their site by hiring a small team of full-time developers.</p>
+        <p>The engineering team’s first priority was to scale the Memely architecture to accommodate their growing user base. During the initial phase of infrastructural scaling, the complexity of Memely’s system increased considerably, and it quickly became clear that the current system did not contain the level of observability required to continue scaling confidently.</p>
+        <p>To complicate matters further, some troubling user behavior has necessitated an audit. The ad agency which Memely’s site hosts ads from is concerned about possible “click fraud”.</p>
+        <figure><img class="small case-study-image" src="images/case-study/click_graph.gif" /></figure>
+        <p>Over the past month the number of clicks, or “user engagements”, with the ads the agency generates and that memely.com hosts were far higher than usual. The agency has asked that the Memely team investigate: no small feat in Memely’s increasingly complex infrastructure.</p>
+
+        <!--Observability-->
+        <h2 id="section-2" class="section-heading">2. Observability</h2>
+        <figure><img class="xs case-study-image" src="images/case-study/observability.png"/></figure>
+        <figcaption>“To observe is to watch carefully.”</figcaption>
+        <p>Observability is the ability to measure the current state of a system using the data the system outputs. Instrumentation is adding code to output that data. The collection of these instrument measurements is called telemetry.</p>
+        <h3>The Pillars of Observability</h3>
+        <p>Observability is often said to be composed of three “pillars”: metrics, traces, and logs.</p>
+        <h4>Metrics</h4>
+        <p>Metrics provide numeric information about the state of a service at runtime. Typically, metrics are aggregations of data over a period of time.</p>
+        <p>The most commonly used metrics are availability, request rate, utilization, and latency. Availability represents the number of requests to a service that result in errors; request rate is a measure of requests per second; utilization is a numerical expression of a system’s CPU or memory usage; and latency is a measure of a system’s response time. These key metrics are often referred to as the ‘Four Golden Signals’.</p>
+        <h4>Traces</h4>
+        <p>Traces record the paths taken by individual requests through a distributed system over time. Each trace is built from multiple spans, which represent time intervals during which discrete operations occur: an API call, or a database write operation. Typically traces are represented by showing a collection of spans organized by time in a waterfall diagram or a flame graph.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/flame_graph.png" /></figure>
+        <figcaption>An example flame graph</figcaption>
+        <h4>Logs</h4>
+        <figure><img class="medium case-study-image" src="images/case-study/structured_logs.png" /></figure>
+        <figcaption>A log file in JSON format</figcaption>
+        <p>Logs are text records of events, and ideally include a timestamp. They come in various structured formats including JSON, CSV, and Common Event Format (CEF), but logs can be completely unstructured as well. Logs provide the most detailed view of what is going on within an application or service.</p>
+        <p>As a system grows, the number of metrics stays constant due to the aggregate nature of metrics. Traces increase linearly with the amount of requests; the complexity of the system does not impact the amount of traces. However, for the same increase in system complexity, the amount of logs increases faster than the number of traces or metrics.</p>
+        <h4>Scaling Logs</h4>
+        <p>Although logs are useful for gaining insight into a system, they don’t scale well. This is particularly evident in distributed systems.</p>
+        <p>Every component of a system’s architecture is likely to produce logs. When services are added to an infrastructure, those nodes will also produce more logs, which by default are stored locally. When logs are stored locally, users must first correctly identify the node containing the desired log entries. As the number of nodes increases, it rapidly becomes infeasible to identify the correct node manually.</p>
+        <p>Therefore, to find the information needed within a distributed system or with a large volume of logs, it is necessary to gather the logs into a centralized location to more efficiently perform searches and analysis there. One popular log management system is called the ELK stack, which is an acronym for the three tools it is composed of: Elasticsearch, Logstash, and Kibana.</p>
+        <h3>ELK Stack</h3>
+        <figure><img class="medium case-study-image" src="images/case-study/elk_overview.png"/></figure>
+        <figcaption>An overview of the ELK stack</figcaption>
+        <h4>Logstash</h4>
+        <figure><img class="xxs case-study-image" src="images/case-study/logstash_logo.png"/></figure>
+        <p>Logstash is a plugin-based data processing pipeline. Its functionality can be broken into three phases: input, transformation, and output. In the case of log management, Logstash takes in the text files where logs are stored (input phase); transforms these text files into a format that is more conducive to searching, like JSON (transformation phase); and sends the transformed data elsewhere for storage (output phase) In an ELK stack, the transformed data is sent to Elasticsearch.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/logstash_stages.png" /></figure>
+        <h4>Elasticsearch</h4>
+        <figure><img class="xxs case-study-image" src="images/case-study/elasticsearch_logo.png"/></figure>
+        <p>Elasticsearch is a flexible tool that can serve as a distributed document store, a real-time search engine, and an analytics engine.</p>
+        <p>Elasticsearch can be described as “real-time” because it can index incoming  data  to make the data searchable in one second. An index in Elasticsearch is like a database in a relational database management system(RDBMS). However, in contrast to a relational database, it is easy to search multiple indexes; therefore, when using Elasticsearch for logs, each day is usually given its own index.</p>
+        <p>To search indexed data, users can write queries with either a domain specific language for searching JSON files, with SQL, or with Event Query Language (EQL).  Also, searches can be run on aggregate data such as metrics. Once indexed, searchable logs are kept in Elasticsearch.</p>
+        <p>However, the more data stored in Elasticsearch, the slower searching will be. To keep searching performant , the amount of data kept in Elasticsearch must be minimized . One way of managing the data contained in Elasticsearch is by using an index lifecycle policy, which enables a high degree of control over how long an index will be retained. For example, an index may be deleted once it has been stored in Elasticsearch for a certain amount of time.</p>
+        <figure><img class="xs case-study-image" src="images/case-study/ilm.gif"/></figure>
+        <p>While searching for information can be performed via the Elasticsearch API, the search results will be presented as a JSON document. For information-rich data, such as logs, it is beneficial to visualize the data in order to understand the state of a system at a glance and make informed decisions. JSON may not succinctly summarize the results in a visually impactful format which is why the ELK stack includes a visualization tool called Kibana.</p>
+        <h4>Kibana</h4>
+        <figure><img class="xxs case-study-image" src="images/case-study/kibana_graphic.png"/></figure>
+        <p>Kibana is a  graphical user interface that lets users visualize their data by allowing them to flexibly query Elasticsearch, to create graphs, and to build custom dashboards. Visualizing information-rich data, such as logs, allows users to see what is happening within their system at a glance.</p>
+        <p>In addition, Kibana allows users to manage their Elasticsearch cluster in a more intuitive environment by allowing users to perform administrative tasks like creating index lifecycle policies in the Kibana dashboard. Otherwise, users would need to manage Elasticsearch via its API.</p>
+        <p>The ELK stack allows users to aggregate and analyze logs, and to create visualizations for application and infrastructure monitoring. Using the ELK stack for log management is a great step towards achieving an observable system, especially if it’s combined with a system for managing traces and metrics. With the three pillars of observability in mind, let’s return to Memely to see how they use their ELK Stack to collect, search, and analyze their logs.</p>
+
+        <!--Log Rehydration-->
+        <h2 id="section-3" class="section-heading">3. Log Rehydration</h2>
+        <h3>Memely’s ELK Stack</h3>
+        <p>After implementing an ELK stack of their own, the Memely team can search all of the logs generated by the Memely infrastructure, which has allowed them to derive metrics based on the data the logs contain. For example, the team can visualize their web server logs and analyze server response times to gauge how memely.com’s growing user base has impacted the site’s availability.  With the added oversight that an ELK stack provides, the Memely team feels more confident about their current scaling efforts.</p>
+        <p>However, utilizing an ELK stack has introduced a separate set of challenges for the Memely team. Elasticsearch's strength is fast searching, but the search speed slows as the number of documents increases. Additionally, increasing the number of documents introduces complexity concerning index management and memory allocation within Elasticsearch.</p>
+        <p>To address these challenges, the Memely team decides to store their logs in two locations. First, Memely will ship their logs to AWS S3 for archival. Second, to keep Elasticsearch manageable and performant, Memely will index only the most recent 14 days' worth of logs into Elasticsearch. This solution reduces the number of documents stored in Elasticsearch and grants the Memely team peace of mind knowing all their logs are archived in secure cloud storage.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/memely_dual_logs.gif" /></figure>
+        <figcaption>Memely using Logstash to ship logs to AWS S3 and Elasticsearch</figcaption>
+        <h3>The Audit</h3>
+        <h4>Suspicious Client IP</h4>
+        <p>When we last left Memely, the ad agency that memely.com hosts ads from had requested that Memely investigate a suspiciously high number of user engagements that indicated an event of “click fraud”. Thanks to their new ELK Stack, Memely team was quickly able to gather information about the requests made to memely.com over the previous two weeks. Memely’s ELK Stack played an invaluable role here, and the team was quickly able to establish that one client IP address was responsible for a drastically disproportionate number of the requests made in the previous 14 days.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/ip_dist_donut.png" /></figure>
+        <h4>Suspicious Behavior</h4>
+        <p>In order to better understand how this client had been interacting with their site, the Memely team looked at all of the indexed web server logs involving the client’s IP address. They discovered that all of the requests issued by the client had been GET requests sent to the root page of memely.com, where the majority of the hosted ads are served. They also observed that the client made no attempts to visit any other pages within the site, which deviates from the way that most users interact with their site. At this point the Memely team is confident that they are dealing with a malicious user, reinforcing suspicions that memely.com experienced click fraud within the past 30 days.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/behavior_breakdown.png" /></figure>
+        <p>The next thing the Memely team would like to know is how long this has been going on. Because they only have the most recent 14 days of logs indexed in Elasticsearch, the Memely team does not currently have all of the data that they need in order to complete their audit.</p>
+        <h4>Log Rehydration</h4>
+        <p>What the Memely team needs is a way to transfer logs they currently have archived in AWS S3 back into Elasticsearch so that they can search them within an environment that is feature-rich and familiar. This process of transferring archived logs back into Elasticsearch for easier searching is often referred to as log rehydration and the Memely team has a few options at their disposal.</p>
+
+        <!--Existing Solutions-->
+        <h2 id="section-4" class="section-heading">4. Existing Solutions</h2>
+        <h3>Commercial Solutions</h3>
+        <p>There is no shortage of commercially available observability solutions offering log rehydration. They all boast a multitude of features, and many are all-in-one solutions, meaning that users do not need to concern themselves with scaling complexities or infrastructure management because the entire log management workflow has been taken care of.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/commercial_solutions.png" /></figure>
+        <figcaption>Some commercial log rehydration solutions</figcaption>
+        <p>While a commercial solution is an option the Memely team could explore, they have some reservations.</p>
+        <p>As a small company with limited resources, Memely would like to avoid the cost of a commercial solution. At the very least, the Memely team wants to avoid paying for any features they do not need. Many commercial tools are geared toward enterprise companies, offering features like machine learning integration and business intelligence - features that are currently out of scope for Memely.</p>
+        <p>Additionally, most commercial solutions would replace their existing ELK stack, and with the audit going on, the Memely team wants to minimize - as much as possible - the time it may take to get up to speed with a new tool.</p>
+        <h3>DIY Solutions</h3>
+        <p>If a commercial solution doesn't fit Memely's needs, they could look to utilize open-source tools that transfer logs from AWS S3 into Elasticsearch. For example, because the Memely team is already using an ELK stack, they could utilize the Logstash S3 input plugin, allowing them to stream archived logs back into Elasticsearch. This seems like a viable solution at first glance; the Memely team could save on cost using a free plugin, and the Logstash S3 input plugin readily integrates with their existing ELK stack.</p>
+        <p>However, the default behavior of the Logstash S3 input plugin is to rehydrate all the log files within an S3 bucket. Therefore, if the Memely team would like to perform rehydration on specific files, they would need to experiment with exclusion patterns within their S3 input plugin's configuration file which would require skilled use of regular expressions along with some trial and error.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/too_many_logs.png" /></figure>
+        <figcaption>The Logstash S3 input plugin returns entire S3 buckets, which may be more data than is needed</figcaption>
+        <p>In addition, for their audit and to reduce their impact on Elasticsearch's capacity, the Memely team may only want to rehydrate the log lines that pertain to the spammy client they identified during their preliminary audit. Unfortunately, the Logstash S3 input plugin cannot provide this level of granularity when attempting to rehydrate logs. Utilizing it will likely introduce excess data into Elasticsearch, from which the Memely team may derive little value.</p>
+        <figure><img class="large case-study-image" src="images/case-study/solution_breakdown.png" /></figure>
+        <p> Ideally, the Memely team needs a tool to rehydrate logs that is easy to use, like a commercial solution, while still integrating with their existing ELK stack to reduce monetary costs.</p>
+        <p>Luckily, there is another option to consider, Arroyo. The scarcity of open-sourced rehydration tools is one of the primary reasons we decided to build Arroyo.</p>
+        
+        <!--Arroyo-->
+        <h2 id="section-5" class="section-heading">5. Arroyo</h2>
+        <figure><img class="medium case-study-image" src="images/case-study/arroyo_high_level.png" /></figure>
+        <figcaption>A high level look at Arroyo's architecture</figcaption>
+        <p>Arroyo is a lightweight framework that facilitates the rehydration of logs, granting users the ability to select a specific timeframe to search for relevant log files. Additionally, Arroyo supports query searching; a user can provide log attributes in order to conditionally rehydrate logs for more granular control over what data is rehydrated. Search results are retrieved from a user's AWS S3 bucket and reingested into Elasticsearch.</p>
+
+        <!--Using Arroyo-->
+        <h2 id="section-6" class="section-heading">6. Using Arroyo</h2>
+        <h3>Rehydration</h3>
+        <p>Arroyo offers two ways to rehydrate a user's archived logs; bulk rehydration and a query rehydrate option. Bulk rehydration allows a user to re-ingest whole log files. In contrast, Arroyo's query rehydration enables users to re-ingest only the most relevant log entries to reduce the impact on the capacity within Elasticsearch.</p>
+        <h4>Bulk Rehydration</h4>
+        <p>To start a bulk rehydration job, click on the <em>By Date Range</em> tab and enter a start date and an end date. Then, click on the <em>Select Log Files</em> button. A list of files generated within the entered date range will populate the list in the <em>Select</em> section. Choose the files to be rehydrated and click <em>Ingest Selected Files.</em> Once a notification of job completion is displayed, the newly rehydrated logs will be available for viewing in Kibana.</p>
+        <figure><img class="large case-study-image" src="images/case-study/bulk_rehydrate.gif" /></figure>
+        <figcaption>Arroyo's bulk rehydration allows users to select individual log files to rehydrate</figcaption>
+        <h4>Query Rehydration</h4>
+        <p>To start a query rehydrate job, click on the <em>By Search Term</em> tab and enter start and end dates. Next, enter a log attribute (I.e., request_method) and a log attribute value (I.e, GET) and click the plus (+) button. Up to two pairs of log attributes and their corresponding values may be entered. Once the desired queries have been entered, click on <em>Ingest Matching Log Entries</em> to begin re-ingestion. Once a notification of re-ingestion is displayed, the ingested log entries will be available to view within Kibana.</p>
+        <figure><img class="large case-study-image" src="images/case-study/query_rehydrate.gif" /></figure>
+        <figcaption>Arroyo's query rehydration allows users to rehydrate logs with more precision</figcaption>
+        <h4>Index Cleanup</h4>
+        <p>One of the challenges with using Elasticsearch is striking a balance between having too much information on hand and too little information. Arroyo reintroduces data into Elasticsearch, leading to questions surrounding data management. For example, how can users remove rehydrated data once they have derived its value?</p>
+        <p>Arroyo's proposed solution to these questions is to provide users with a Logstash configuration template that they may utilize to set up their Logstash HTTP input plugin. In addition, the provided template instructs Elasticsearch to create a new, separate index for rehydrated logs generated by Arroyo.</p>
+        <p>The creation of this new index allows users to delete the entire index and any rehydrated logs without deleting day-to-day logs. Our team designed Arroyo to integrate into a user's existing ELK stack, so ensuring that our application would not impede a user's existing workflow was critical.</p>
+        <figure><img class="large case-study-image" src="images/case-study/index_delete.gif" /></figure>
+        <p>The Logstash HTTP input template Arroyo provides is a guideline, but users are encouraged to configure their http input plugin to suit their use case.</p>
+        <p>For ease of data management, we encourage users to follow Arroyo's pattern of creating a new index for rehydration purposes.</p>
+
+        <!--Arroyo Architecture-->
+        <h2 id="section-7" class="section-heading">7. Arroyo Architecture</h2>
+        <figure><img class="large case-study-image" src="images/case-study/arroyo_full_architecture.png" /></figure>
+        <p>The Arroyo application consists of an Arroyo Client and an Arroyo Server; the Arroyo Client is a React application that provides the Arroyo UI, while the Arroyo Server is a Node application that interacts with AWS resources and facilitates the rehydration and re-ingestion of logs.</p>
+        <p>The Arroyo Client and Arroyo Server applications are containerized using Docker and Docker Compose.</p>
+        <p>Let’s go over AWS services that Arroyo uses to perform the rehydration of logs.</p>
+        <h3>Arroyo AWS Resources</h3>
+        <p>During the installation, Arroyo provisions several AWS resources programmatically using AWS SDK.</p>
+        <ul>
+          <li>Arroyo provisions four SQS Queues: two main SQS queues - a Rehydration SQS Queue and a Status SQS Queue - and their corresponding Dead Letter Queues (DLQ).</li>
+          <li>Arroyo creates a separate S3 bucket to host the Lambda deployment package.</li>
+          <li>Arroyo also creates an IAM role for the Lambda function. The role has all the permissions the Lambda will need to interact with other AWS services.</li>
+          <li>Lastly, Arroyo creates the Lambda Function itself and sets the Rehydration SQS Queue as its Event trigger.</li>
         </ul>
-        <p class="c4"><span class="c10 c0">Once the message is placed on the queue, Lambda function is invoked. Lambda
-            will do
-            one of two things: </span></p>
-        <ul class="c42 lst-kix_glb7cfipagnw-0 start">
-          <li class="c4 c26"><span class="c10 c0">If the message body contains a SQL expression, Lambda will use that
-              SQL
-              expression to query the file.</span></li>
+        <figure><img class="medium case-study-image" src="images/case-study/arroyo_phases.png" /></figure>
+        <figcaption>Arroyo split into phases</figcaption>
+        <p>Conceptually, we can split the Arroyo application into three key phases: Rehydrate, Reingest, and Notify. Let’s take a look at each of them.</p>
+        <h3>Rehydrate</h3>
+        <figure><img class="medium case-study-image" src="images/case-study/rehydrate_phase.gif" /></figure>
+        <p>During the Rehydrate phase, the first phase in the log rehydration pipeline, the Arroyo Server receives a list of file names from the Arroyo Client. The list contains all the files that need to be rehydrated from the user’s S3 bucket into their ELK stack. To rehydrate a file, the Arroyo application has to either download the entire file or query that specific file using the user-provided query. Once Arroyo rehydrates the log data from the S3 bucket, it then passes it to the next phase.</p>
+        <p>Let’s take a look at the Rehydrate phase more closely, where the user can perform either bulk log rehydration or query-based log rehydration.</p>
+        <h4>Bulk Log Rehydration</h4>
+        <p>In the case of bulk log rehydration, the user specifies a date range. The Arroyo Client passes that date range to the Arroyo Server.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/bulk_rehydrate_high_level.png" /></figure>
+        <p>The Server then fetches the names of the log files (also called keys) that fall within that date range from the user’s S3 bucket.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/file_fetching.png" /></figure>
+        <p>The Server sends these keys to the Arroyo Client, which displays the file names to the user. The user may select the files that they would like to have rehydrated. Once the user clicks <em>Ingest Selected Files</em>, the Client forwards the selected file names to the Arroyo Server for rehydration.</p>
+        <figure><img class="large case-study-image" src="images/case-study/bulk_rehydrate.gif" /></figure>
+        <h4>Query-based Log Rehydration</h4>
+        <p>If the user decides to submit query-based rehydration, they may specify up to two log attributes and their corresponding values (a query) in addition to a date range. Once the user submits their rehydration request, the Client forwards the date range with the query to the Arroyo Server for rehydration.</p>
+        <figure><img class="large case-study-image" src="images/case-study/query_rehydrate.gif" /></figure>
+        <p>Once the Server receives the date range and an optional query from the Arroyo Client, it requests all of the files that fall within that date range, just as it does during bulk log rehydration. However, in this case, it does not forward the list to the Arroyo Client, and instead, it starts processing the rehydration request.</p>
+        <p>For each file name in the list, the Arroyo server creates a message and then places it onto the Rehydration SQS Queue. Within the body of the message, the Server includes the following information:</p>
+        <ul>
+          <li>The <b>S3 Bucket name</b> where logs are stored</li>
+          <li>The <b>Key</b> that represents the name of the file to be queried or fetched</li>
+          <li>The <b>Logstash endpoint</b> where Lambda will send the logs to</li>
+          <li>The <b>SQL expression</b>, built by the Arroyo Server using the search terms provided by the user</li>
         </ul>
-        <ul class="c42 lst-kix_fjojr2om50e-0 start">
-          <li class="c4 c26"><span class="c10 c0">Otherwise Lambda will fetch the whole file.</span></li>
+        <figure><img class="medium case-study-image" src="images/case-study/message_1.png" /></figure>
+        <p>Once the first message is placed on the queue by Server, the Lambda function spins up.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/message_route.png" /></figure>
+        <p>Lambda picks up a message from the queue and, based on its contents, will do one of two things:</p>
+        <ul class="numbered">
+          <li>If the message body contains a SQL expression, Lambda will use that SQL expression to query the file, otherwise</li>
+          <li>the Lambda will fetch the whole file.</li>
         </ul>
-        <p class="c7"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 502.71px; height: 394.00px;"><img
-              alt="" src="images/image12.gif"
-              style="width: 502.71px; height: 394.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c4"><span class="c10 c0">Now we are gonna describe how the file containing logs is queried in a bit
-            more
-            detail. </span></p>
-        <p class="c4"><span class="c25">We perform the query by utilizing the </span><span class="c37">Amazon S3 Select
-          </span><span class="c25">feature. S3 Select allows for filtering and retrieving data contained within an S3
-            buck</span><span class="c5">et. It allows us to query </span><span class="c10 c0">structured data using
-            simple SQL
-            statements. The log data stored in S3 bucket must be in JSON format. Although S3 select also supports CSV or
-            Apache Parquet, currently Arroyo only supports JSON format.</span></p>
-        <p class="c13"><span class="c25">To perform querying of the logs via the S3 Select feature</span><span
-            class="c5">&nbsp;&ndash; we use </span><span class="c37 c17">selectObjectCo</span><span
-            class="c37">ntent</span><span class="c10 c0">&nbsp;action to create and submit a query request. This is done
-            via
-            AWS SDK. We send the user generated SQL expression as a part of the request. We also specify that we would
-            like
-            any matches to be serialized and returned in JSON format. </span></p>
-        <p class="c13"><span class="c10 c0">Once Amazon S3 receives the request, it parses the data into records and
-            then
-            returns the records that match the provided SQL expression.</span></p>
-        <p class="c13"><span class="c25">Being able to query the log files allows us to retrieve a subset of the file
-            contents
-            and therefore reduce the amount of data that we re-ingest into the user&#39;s ELK stack.</span></p>
-        <h2 class="c1 c29" id="h.pr98np9lenn4"><span class="c22 c0"></span></h2>
-        <h2 class="c1" id="h.u0awsqqsndxj"><span class="c3 c0">Reingest</span></h2>
-        <p class="c7"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 1886.00px; height: 862.00px;"><img
-              alt="" src="images/image25.png"
-              style="width: 1886.00px; height: 862.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c13"><span class="c25">During the </span><span class="c25">Reingest</span><span
-            class="c25">&nbsp;phase</span><span class="c10 c0 c17">&nbsp;Lambda makes a POST request to the Logstash
-            endpoint
-            provided by the user. Once the rehydrated logs are POSTed, Logstash forwards the logs to Elasticsearch.
-            After they
-            are indexed by Elasticsearch, the logs are ready to be viewed in the Kibana dashboard. </span></p>
-        <h3 class="c31 c53 c63" id="h.alkgdz1xiyyr"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 530.04px; height: 394.00px;"><img
-              alt="" src="images/image2.gif"
-              style="width: 530.04px; height: 394.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></h3>
-        <p class="c13"><span class="c5">But how does the Arroyo Client know when the reingestion job is completed so
-            that it
-            can notify the user? Let&rsquo;s take a look at how that happens.</span></p>
-        <h2 class="c1 c29" id="h.r96o01xjc434"><span class="c22 c0"></span></h2>
-        <h2 class="c1" id="h.i1d7tqyq899f"><span class="c3 c0">Notify</span></h2>
-        <p class="c7"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 774.50px; height: 348.30px;"><img
-              alt="" src="images/image8.png"
-              style="width: 774.50px; height: 348.30px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c13"><span class="c10 c0">Once the logs are rehydrated and then forwarded to Logstash by Lambda,
-            Arroyo
-            application needs to be notified about the outcome of the rehydration request.</span></p>
-        <p class="c13"><span class="c10 c0">After Lambda gets a response from Logstash, Lambda grabs the response data
-            and
-            packages it into a message. It then places that message onto a Status SQS queue. The goal of the Status
-            queue is
-            to hold the status of the reingestion tasks for the Arroyo server to pick up.</span></p>
-        <p class="c13"><span class="c10 c0">While Lambda is processing tasks that are on the Rehydration Queue, the
-            following
-            happens on the Arroyo application server side. </span></p>
-        <p class="c13"><span class="c10 c0">Once the Arroyo server finishes sending all of the messages to the
-            Rehydration
-            Queue, it starts polling Status Queue. </span></p>
-        <p class="c31"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 800.00px; height: 625.00px;"><img
-              alt="" src="images/image4.gif"
-              style="width: 800.00px; height: 625.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c13"><span class="c10 c0">For each message it receives from the Status Queue, it saves the body of
-            that
-            message and then deletes that message from the queue. Once there are no more messages on the Status Queue,
-            the
-            Arroyo Server sends a single notification to the Arroyo Client via Server Sent Events.</span></p>
-        <p class="c13"><span class="c10 c0">Arroyo Client receives the notification event and then notifies the user via
-            a
-            toast message. </span></p>
-        <hr>
-        <p class="c8"><span class="c2 c0"></span></p>
-        <h1 class="c1" id="section-8"><span class="c15 c0">8. Engineering Decisions</span></h1>
-        <p class="c13"><span class="c25">While developing Arroyo we encountered a number of engineering challenges:
-            &nbsp;</span><span class="c25">how to make sure that we rehydrate logs in a controlled manner and without
-            overwhelming Logstash service, how to ensure that Arroyo SQS Queues are not blocked by any problematic
-            messages,
-            and how to </span><span class="c5">collect the status of the reingestion job and notify the Client of its
-            subsequent completion.</span><sup><a href="#cmnt10" id="cmnt_ref10">[j]</a></sup></p>
-        <p class="c13 c21"><span class="c2 c0"></span></p>
-        <h2 class="c1" id="h.ivaz3qcxrlde"><span class="c3 c0">Message Buffer</span></h2>
-        <p class="c11"><span class="c10 c0">In order to re-ingest logs from S3 bucket we could simply configure Logstash
-            S3
-            input plugin to access the S3 bucket directly and reingest all of the logs that it contains.</span></p>
-        <p class="c11"><span class="c25">The problem is that we do not need t</span><span class="c5">o
-            re-ingest</span><span class="c10 c0">&nbsp;the entire bucket contents, instead, we need to be able to
-            reingest the logs with
-            precision.</span></p>
-        <p class="c11"><span class="c10 c0">Potential alternative approach is to use an Http input plugin instead. With
-            the
-            Http input plugin we could send each rehydrated log or a whole log file as a POST request. However, there is
-            a
-            problem with this approach. </span></p>
-        <p class="c11"><span class="c10 c0">As the number of rehydration tasks and number of POST requests to Logstash
-            increases dramatically, we could potentially overwhelm the Logstash service. For example, if the user
-            decides to
-            reingest 1000s of files in a single rehydration job, with the current approach we would have to send 1000s
-            of POST
-            requests, one right after the other. </span></p>
-        <p class="c11"><span class="c10 c0">This may result in Logstash service getting overwhelmed and even shutting
-            down.</span></p>
-        <h3 class="c9" id="h.l46274plmpsc"><span class="c14">Possible Solution: Kafka</span></h3>
-        <p class="c13"><span class="c0 c10">The initial solution we came up with was to introduce Kafka into our
-            architecture.</span></p>
-        <p class="c13"><span class="c5">Kafka is a distributed event-streaming data store used for ingesting and
-            processing of
-            data in real-time. Kafka would serve as the middleman between the Arroyo application and the user&#39;s ELK
-            stack.
-          </span><span class="c25">In order to integrate Kafka we would have to create a Kafka Producer and we would
-            also have
-            to configure Logstash to be able to accept Kafka events. Kafka Producer could be a standalone Node
-            application
-            that would create and forward messages to a Kafka topic.</span><span class="c10 c0 c44">&nbsp;</span></p>
-        <p class="c28"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 416.52px; height: 272.93px;"><img
-              alt="" src="images/image26.gif"
-              style="width: 416.52px; height: 272.93px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c13 c21"><span class="c10 c0 c17"></span></p>
-        <p class="c13"><span class="c5">If we were to integrate Kafka into our architecture, we would be able to have
-            full
-            control over which logs are ingested and also ensure that the </span><span class="c10 c0">rehydration and
-            reingestion layers are decoupled from the server logic.</span></p>
-        <p class="c13"><span class="c10 c0">This approach would work well, but after conducting more research we came to
-            a
-            conclusion that setting up a Kafka Producer is a non-trivial task. </span></p>
-        <h3 class="c9" id="h.f6q6apppfsfm"><span class="c14">Solution: AWS SQS and AWS Lambda</span></h3>
-        <p class="c13"><span class="c10 c0">The solution that we decided to implement was a combination of Amazon SQS
-            Queue
-            and AWS Lambda Function. </span></p>
-        <p class="c13"><span class="c10 c0">SQS Queue would serve as a buffer and Lambda would perform rehydration and
-            reingestion tasks.</span></p>
-        <p class="c31"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 452.50px; height: 341.07px;"><img
-              alt="" src="images/image24.gif"
-              style="width: 452.50px; height: 341.07px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <h4 class="c30" id="h.bifq0bmtrenu"><span>Amazon Simple Queue Service</span></h4>
-        <p class="c13"><span class="c10 c0">Amazon Simple Queue Service is a fully managed solution that allows
-            developers to
-            easily create, use and manage a queue. Using a queue would allow us to create a buffer between the Arroyo
-            Server
-            and reingestion and rehydration layers. This would provide for better performance, scalability and
-            reliability of
-            the whole application.</span></p>
-        <p class="c13"><span class="c10 c0 c17">Additionally, it is easily integrated with AWS Lambda and it is fairly
-            simple
-            to create and interact with using AWS SDK. </span></p>
-        <p class="c13"><span class="c10 c0 c17">The downside of this choice is that introducing new components like an
-            SQS
-            queue increases the overall complexity of the application. </span></p>
-        <h4 class="c62" id="h.vu8xdqg5l6ou"><span class="c47">AWS Lambda</span></h4>
-        <p class="c13"><span class="c25">AWS Lambda is a serverless compute service that </span><span class="c25">allows
-            to
-            run code</span><sup><a href="#cmnt11" id="cmnt_ref11">[k]</a></sup><span class="c10 c0">&nbsp;without
-            provisioning
-            servers. It is easily integrated with SQS. </span></p>
-        <p class="c13"><span class="c10 c0">In our case we programmatically created both SQS Queue and a AWS Lambda and
-            then
-            configured SQS Queue as Lambda&rsquo;s trigger, so that once the Queue receives a message, Lambda
-            automatically
-            spins up and performs rehydration and reingestion tasks.</span></p>
-        <p class="c13"><span class="c10 c0">Benefit of using Lambda function is that it takes on rehydration and
-            reingestion
-            functions, therefore making our backend server more lightweight.</span></p>
-        <p class="c13"><span class="c10 c0">The downside of using lambda was that deploying lambda programmatically
-            still
-            requires quite a bit of work.</span></p>
-        <h2 class="c1 c29" id="h.flexk4aeipdr"><span class="c22 c0"></span></h2>
-        <h2 class="c1" id="h.ke0v9glsbcyf"><span class="c3 c0">Handling failed queue messages</span></h2>
-        <p class="c13"><span class="c10 c0">Once we decided that using SQS Queue combined with AWS Lambda works best for
-            our
-            use case, the next issue we had to consider was how to ensure that the Queue is not blocked by any
-            problematic
-            messages.</span></p>
-        <h3 class="c1" id="h.qp2txz6wzhmf"><span class="c14">Possible Solution: Error handling in Arroyo Server
-            code.</span>
-        </h3>
-        <p class="c13"><span class="c25">The first approach w</span><span class="c5">e considered </span><span
-            class="c10 c0">was to simply add more error handling and &ldquo;retry&rdquo; logic to the Server code. Upon
-            further investigation as to what that logic should be, we realized that it might end up being very
-            complex.</span>
+        <figure><img class="medium case-study-image" src="images/case-study/lambda_fetch_files.png" /></figure>
+        <p>Now let’s explore how the log file is queried in more detail.</p>
+        <h4>Querying JSON files with Amazon S3 Select</h4>
+        <p>Arroyo performs the query by utilizing the <b>Amazon S3 Select</b> feature. S3 Select allows for retrieving a subset of data from an S3 bucket by submitting a query request containing a simple SQL statement. The log data stored in the S3 bucket must be in JSON format. Although S3 Select supports CSV or Apache Parquet in addition to JSON, Arroyo currently only supports JSON format.</p>
+        <p>To query the logs with S3 Select Arroyo uses the <b>selectObjectContent</b> action with the AWS SDK to create and submit a query request. Using keywords provided by the user Arroyo dynamically creates a SQL expression and then includes it in the request. Arroyo also specifies any matches to be serialized and returned in JSON format. Once Amazon S3 receives the request, it parses the data into records and returns the records that match the provided SQL expression.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/s3_select.png" /></figure>
+        <p>The ability to query individual log files and retrieve a subset of the files' contents drastically reduces the amount of data re-ingested into the user's ELK stack. For example, if the bucket contains 10,000 log files, each log is 32 Kilobytes in size on average; Let's assume that only 5% of the logs have relevant data. With bulk re-ingest, this would result in 320 Megabytes being introduced into a user’s ELK stack Considering that only 5% of the data would match the provided query, if we do query-based re-ingest instead, it will result in 16 Megabytes, which is 20 times less.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/comparison.png" /></figure>
+        <h3>Reingest</h3>
+        <p>During the Reingest phase, Arroyo needs to forward the log data fetched from the S3 bucket by the Lambda to the Logstash endpoint so that Logstash can pass it to Elasticsearch for indexing. Now let’s take a look at how exactly this happens.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/reingest_phase.gif" /></figure>
+        <p>The Lambda function makes a POST request containing rehydrated logs to the Logstash endpoint provided by the user. Once this request is complete, Logstash forwards the logs to Elasticsearch. After Elasticsearch indexes the logs, they are ready to be viewed in the Kibana dashboard.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/reingest_flow.png" /></figure>
+        <p>But how does the Arroyo Client know when the reingestion job is completed so that it can notify the user? Let’s take a look at how that happens.</p>
+        <h3>Notify</h3>
+        <p>During the Notify phase, the Arroyo Client needs to be notified about the outcome of the rehydration request that was processed during Rehydrate and Reingest phases so that it can let the user know when rehydration is complete.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/notify_phase.gif" /></figure>
+        <p>Once the logs have been rehydrated and forwarded to Logstash by Lambda during the Rehydrate and Reingest phases, the Arroyo Server needs to send an event to the Arroyo Client about whether or not the rehydration request was processed successfully.</p>
+        <p>After the logs are POSTed to the Logstash endpoint during the Reingest phase, Lambda gets a response from Logstash.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/logstash_conf.png" /></figure>
+        <p>It grabs the response data and packages it into a message containing the name of the log file (objectKey) sent and the request's status (status). It then places that message onto a Status SQS queue. The goal of the Status queue is to hold the status of the reingestion tasks for the Arroyo server to pick up.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/status_message.png" /></figure>
+        <p>At the same time, here is what happens on the Arroyo application server side.</p>
+        <p>Once the Arroyo Server finishes sending all of the messages to the Rehydration Queue, it starts polling the Status Queue.</p>
+        <figure><img class="small case-study-image" src="images/case-study/polling_for_messages.png" /></figure>
+        <p>The Arroyo Server is configured to receive at most ten messages from the Status Queue at a time. The body of each message contains the key field, which represents the name of the file that Lambda processed, and the status field that indicates the request's status. The Arroyo Server saves the body of each message and the corresponding receipt handle. 
+          Once the message is processed, the Arroyo Server tells the Status Queue to delete it by providing the message receipt handle.
         </p>
-        <h3 class="c1" id="h.kl9ykt6dm1f0"><span class="c14">Solution: A Dead Letter Queue</span></h3>
-        <p class="c13"><span class="c10 c0 c17">A Dead Letter Queue is a queue that is created specifically to hold
-            messages
-            that can&rsquo;t be processed. It allows us to put aside messages that failed, so that they don&rsquo;t
-            block the
-            queue. Also having a DLQ makes troubleshooting of failed messages much easier.</span></p>
-        <p class="c31"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 389.17px; height: 272.93px;"><img
-              alt="" src="images/image9.gif"
-              style="width: 389.17px; height: 291.38px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c21 c38"><span class="c10 c0 c17"></span></p>
-        <p class="c13"><span class="c5">Once the main queue, in our case Rehydration Queue, receives a message, it
-            attempts to
-            process the message </span><span class="c10 c17 c36">a specified number of times. If the message processing
-            continues to fail and message retention is set to a relatively long period of time </span></p>
-        <p class="c13"><span class="c10 c36 c17">or volume of messages is large, there is a chance of failed messages
-            blocking
-            the main queue.</span></p>
-        <p class="c13"><span class="c5 c36">Having a Dead Letter Queue ensures that the main queue is not blocked and
-            recovers
-            quickly.</span></p>
-        <h2 class="c1 c29" id="h.wdtruuau7uhv"><span class="c22 c0"></span></h2>
-        <h2 class="c1" id="h.zfiveqhi345p"><span class="c3 c0">Notifying the Client</span></h2>
-        <p class="c11"><span class="c10 c0">While developing Arroyo we needed to ensure that the Client should have
-            visibility
-            into reingestion task status and is notified of a task&rsquo;s completion.</span></p>
-        <p class="c11"><span class="c25">In order to achieve that we needed to somehow access the result of each POST
-            request
-            sent to Logstash, combine the results of all requests and pass it to the Arroyo application.</span></p>
-        <h3 class="c1" id="h.th6zkuh10n61"><span class="c14">Possible Solution: Webhook</span></h3>
-        <p class="c11"><span class="c10 c0">The first solution we considered involved setting up a Webhook. </span></p>
-        <p class="c11"><span class="c10 c0">A webhook is an API endpoint that would accept data payload from a different
-            service which in turn would trigger some event.</span></p>
-        <p class="c11"><span class="c10 c0">Our backend would expose an endpoint - a Webhook, &nbsp;that would accept
-            POST
-            requests, each POST request would contain a status of a single reingestion job.</span></p>
-        <p class="c11"><span class="c10 c0">We would also need the user to provide a host or an ip address of the
-            machine
-            where the Arroyo application is deployed and then we would need to pass that information to the Lambda, so
-            that it
-            knows where to POST the status.</span></p>
-        <p class="c11"><span class="c5">This approach seemed like a viable solution. A downside of this approach is that
-            the
-            Notification layer would be tightly coupled with the rest of the logic.</span></p>
-        <h3 class="c1" id="h.8e4vb3i8zn6t"><span class="c14">Solution: Status SQS Queue</span></h3>
-        <p class="c11"><span class="c10 c0">Once the Lambda receives a response from Logstash, it would place a message
-            containing the result of the request on the Status SQS Queue. The backend server would pick up and then
-            process
-            the message. Once all messages are processed, it would notify the Client.</span></p>
-        <p class="c11"><span class="c25">One important positive of this approach is that if we were to build a more
-            robust
-            notification system in the future, we already have a way to access the status of each reingested log (or log
-            file).</span></p>
-        <hr>
-        <p class="c8"><span class="c2 c0"></span></p>
-        <h1 class="c1" id="section-9"><span class="c15 c0">9. Future Work</span></h1>
-        <h2 class="c1" id="h.oah7nw748lr9"><span class="c3 c0">Improved Visibility</span></h2>
-        <p class="c7"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 238.82px; height: 238.82px;"><img
-              alt="" src="images/image5.gif"
-              style="width: 238.82px; height: 238.82px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c12"><span class="c0 c32">As Arroyo currently exists, a user is notified within the Arroyo client UI
-            when a
-            rehydration task is initiated or completed. This simple notification system may work well for smaller
-            rehydration
-            tasks with relatively short processing times. However, a user might feel left in the dark if processing
-            times were
-            to increase due to an increased log volume or network latency.</span></p>
-        <p class="c12"><span class="c32 c0">One of the goals the Arroyo team has moving forward is to develop a more
-            robust
-            notification feature. For example, we want to notify users at various stages along the rehydration task and
-            improve error messaging should a job fail.</span></p>
-        <h2 class="c1 c29" id="h.u6u5pss7pthm"><span class="c0 c22"></span></h2>
-        <h2 class="c1" id="h.1h4n5oogmxqd"><span class="c3 c0">Improved Searching</span></h2>
-        <p class="c7"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 191.00px; height: 230.09px;"><img
-              alt="" src="images/image1.gif"
-              style="width: 275.56px; height: 274.29px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c12"><span class="c32 c0">In the future, our team would like to expand Arroyo to be able to perform
-            full-text searching to facilitate support for other log formats. We acknowledge that full-text searching is
-            challenging at the best of times, but the ultimate goal would be to provide more flexibility for end
-            users.</span>
+        <figure><img class="medium case-study-image" src="images/case-study/message_to_delete.png" /></figure>
+        <p>The Arroyo Server continuously polls the Status Queue for any new messages. It increments the counter once it gets a “No messages” response from the Status Queue. Once the counter is incremented three times, the Arroyo Server determines that there are no more messages and stops polling the queue.</p>
+        <figure><img class="small case-study-image" src="images/case-study/long_polling.png" /></figure>
+        <p>Once there are no more messages on the Status Queue, the Arroyo Server sends a single notification to the Arroyo Client via a server-sent event.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/server_sent_event.png" /></figure>
+        <p>The Arroyo Client receives the notification event and then notifies the user via a toast message.</p>
+
+        <!--Engineering Decisions-->
+        <h2 id="section-8" class="section-heading">8. Engineering Decisions</h2>
+        <p>While developing Arroyo, we encountered a number of engineering challenges:</p>
+        <ul class="numbered">
+          <li>How do we make sure that we rehydrate logs without overwhelming Logstash service?</li>
+          <li>How do we ensure that Arroyo SQS queues are not blocked by any problematic messages?</li>
+          <li>How do we collect the status of a reingestion job and then notify the client of its subsequent completion?</li>
+        </ul>
+        <h3>Log Rehydration via Message buffer</h3>
+        <p>To re-ingest logs from an Amazon S3 bucket, Logstash can be configured to access the bucket directly and re-ingest all the logs it contains. An input plugin allows Logstash to read a log event from a specific event source. For example, with the S3 input plugin, the S3 bucket is set as the event source.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/s3_input_plugin.png" /></figure>
+        <p>Using the S3 input plugin for our use case can be problematic because we do not need to re-ingest the entire bucket contents. This plugin does not allow us to specify files in the S3 bucket that we want to ingest into Logstash. 
+          We need to be able to re-ingest only the logs that fall within the provided date range or the logs that fall within the provided date range and contain the keywords provided by the user. One way to achieve that is to use the Logstash HTTP input plugin which allows Logstash to accept logs via HTTP or HTTPS. 
         </p>
-        <p class="c12"><span class="c59">Another search-related feature our team would like to improve is Arroyo&rsquo;s
-            query
-            rehydrate feature. Currently, Arroyo supports a maximum of two log attributes to search and rehydrate logs
-            conditionally. We would like to enhance Arroyo&#39;s SQL expression-generating logic to support more complex
-            queries.</span></p>
-        <h2 class="c1 c29" id="h.8yhx1jiuzl0s"><span class="c22 c0"></span></h2>
-        <h2 class="c1" id="h.v58grnrnllf1"><span class="c0 c3">More Flexibility</span></h2>
-        <p class="c7"><span
-            style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 253.40px; height: 144.91px;"><img
-              alt="" src="images/image11.png"
-              style="width: 253.40px; height: 144.91px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
-              title=""></span></p>
-        <p class="c12"><span class="c32 c0">At the moment, Arroyo only integrates with AWS S3. Moving forward, our team
-            would
-            like to develop a strategy to support other cloud storage providers. Our team acknowledges that this is a
-            non-trivial task and would require a significant redesign of our application. Our ultimate goal would be to
-            extend
-            the benefits of log rehydration to a broader range of use cases.</span></p>
-        <hr>
-        <p class="c8"><span class="c2 c0"></span></p>
-        <h1 class="c1" id="section-10"><span class="c15 c0">10. References</span></h1>
-        <h1 class="c1 c64" id="h.o90ubsjem4nm"><span class="c0 c15"></span></h1>
+        <figure><img class="medium case-study-image" src="images/case-study/arroyo_to_logstash.png" /></figure>
+        <p>With the HTTP input plugin, we could send each rehydrated log or a whole log file as a POST request. However, there is a problem with this approach. 
+          If the number of rehydration tasks and POST requests to Logstash becomes unusually high, we could potentially overwhelm the Logstash service. 
+          Suppose a user submits a single rehydration request containing thousands of log files. In that case, there is a chance that Logstash won’t be able to process all incoming POST requests because of an exceptionally high rate of incoming requests. Some earlier requests may end up timing out, and for some new requests, Logstash may respond with 429 (Too Many Requests), resulting in lost log data. 
+        </p>
+        <p>To protect Logstash from being overwhelmed, we need to add a buffer. The buffer would serve as the event source and would allow Arroyo to queue the messages containing logs. A different component would take the messages off the buffer and process them.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/arroyo_to_buffer.png" /></figure>
+        <p>Adding a buffer would provide for better performance and reliability of the whole application because the messages can be processed at a rate that doesn’t overwhelm Logstash.</p>
+        <h4>Possible Solution: Kafka</h4>
+        <p>The first solution we came up with was introducing Kafka into our architecture.</p>
+        <p>Apache Kafka is a publish-subscribe messaging system. Kafka would serve as the middleman between the Arroyo application and the user's ELK stack.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/arroyo_to_kaftka.png" /></figure>
+        <p>To integrate Kafka, we would have to create and deploy a Kafka Producer, a Kafka Broker, and configure the Logstash Kafka input plugin so that Logstash can accept Kafka events.</p>
+        <p>The Kafka Producer would be responsible for publishing logs as events to the Kafka topic. The Producer can either be a part of the Arroyo Server or a standalone application.</p>
+        <p>The Kafka Broker is a Kafka server that would be responsible for receiving and queueing the log data. We would also have to provision a separate server, most likely an Amazon EC2 instance, to host the Kafka Broker.</p>
+        <p>If we were to incorporate Kafka into our architecture, we would be able to have complete control over which logs are ingested and also ensure that the Rehydration and Reingestion layers are decoupled from the Arroyo Server logic.</p>
+        <p>This approach would work well, but after conducting more research, we concluded that setting up and managing Kafka comes with extra operational overhead. We were looking for a solution that is easier to set up and manage that is also highly scalable.</p>
+        <h4>Solution: AWS SQS and AWS Lambda</h4>
+        <p>We ended up implementing a combination of Amazon SQS Queue and an AWS Lambda Function.</p>
+        <p>The Queue would serve as a buffer, and the Lambda would perform rehydration and reingestion tasks.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/queue_to_lambda.gif" /></figure>
+        <h4>Amazon Simple Queue Service (SQS)</h4>
+        <p>Amazon Simple Queue Service is a fully managed solution that allows developers to create, use and manage a queue easily.</p>
+        <p>Using a queue allows us to create a buffer between the Arroyo Server and the Reingestion and Rehydration layers to prevent Logstash from getting overwhelmed.</p>
+        <p>The downside of this choice is that introducing new components like an SQS queue increases the overall complexity of the application. But even with the increased complexity, it made more sense for our use case to go with SQS since it is much easier to set up and manage than Kafka.</p>
+        <h4>AWS Lambda</h4>
+        <p>AWS Lambda is a serverless compute service that allows code to be run without provisioning servers. It is easily integrated with SQS. In our case, we programmatically created both an SQS Queue and an AWS Lambda function. We then set the SQS Queue as the Lambda function's trigger so that Lambda automatically spins up and performs rehydration and reingestion tasks once the Queue receives a message.</p>
+        <p>The main benefit of using a Lambda is that it takes on the execution of the rehydration and reingestion functions, freeing up our backend server to perform only essential tasks such as coordinating with the Arroyo Client and keeping track of the rehydration job's status.</p>
+        <p>The downside of using the Lambda function is that deploying it programmatically still requires a lot of work. To deploy the Lambda function, we had to create a separate S3 bucket and then upload Lambda's deployment package to it. The deployment package is a zip file containing all of the Lambda function's code and dependencies. Additionally, we had to create a separate IAM role and then attach it to Lambda so that it could access other AWS services.</p>
+        <h3>Handling failed queue messages</h3>
+        <p>Once we decided that using an Amazon SQS combined with an AWS Lambda works best for our use case, the next issue we needed to consider was how to ensure that the queue would not be blocked by any messages that the Lambda can’t consume. Message processing can fail for many reasons, such as issues in the lambda code, corrupted message payload, or network errors.</p>
+        <h4>Possible Solution: Error handling in Arroyo Server code.</h4>
+        <figure><img class="xs case-study-image" src="images/case-study/retry_logic.png" /></figure>
+        <p>The first approach we considered was adding more error handling and “retry” logic to the Server code. Upon further investigation, we realized that the logic required to implement this might be very complex because there is an infinite number of scenarios we would need to capture.</p>
+        <h4>Solution: A Dead Letter Queue</h4>
+        <p>A Dead-letter Queue (DLQ) is a queue that is created specifically to hold messages that can’t be consumed. It allows us to put aside failed messages so they don’t block the main queue.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/dql.gif" /></figure>
+        <p>Once the main queue receives a message, Lambda is triggered where it then attempts to process the message a specified number of times. If the message processing continues to fail and the SQS queue message retention is set to a relatively long period of time, or if the volume of messages is large, there is a chance of failed messages blocking the main queue.</p>
+        <p>A DLQ ensures that the main queue is not blocked and can recover quickly. If Lambda is unable to process the messages that are on the main queue, the messages are automatically transferred to the Dead Letter Queue.</p>
+        <p>With Dead-letter Queues, developers can configure alarms to signal when messages are transferred to a Dead Letter Queue, indicating that some error has occurred. Then they could attempt to reprocess the messages by redirecting them back to the main queue or examine logs to investigate what has caused the message processing to fail.</p>
+        <h3>Notifying the Client</h3>
+        <p>While developing Arroyo, we needed to ensure that the Client has visibility into the status of rehydration tasks and is notified of a task’s completion.</p>
+        <p>To achieve that, we needed to access the result of each POST request sent to Logstash, combine the results of all requests, and pass them to the Arroyo application.</p>
+        <h4>Possible Solution: Webhook</h4>
+        <p>The first solution we considered involved setting up a webhook.</p>
+        <p>A webhook is an API endpoint that accepts a data payload from a different service which in turn triggers some event.</p>
+        <p>Our backend would expose an endpoint - a webhook - that would accept POST requests, and each POST request would contain a status of a single reingestion job. We would need the user to provide a host or an IP address of the machine where the Arroyo application is deployed, and then we would need to pass that information to the Lambda function so that it would know where to send the POST request with the status.</p>
+        <p>This approach seemed like a viable solution. However, in this case, the Notification layer would be tightly coupled with the rest of the logic. Which we wanted to avoid because tightly coupled systems are harder to maintain and scale since their components are too dependent on each other.</p>
+        <h4>Status SQS Queue</h4>
+        <p>We decided to implement a second SQS queue, the Status SQS queue.</p>
+        <p>Once Lambda receives the response from Logstash, it will place a message containing the result of the request onto the Status SQS Queue. The Arroyo backend server would pick up and then process the message. Once all messages are processed, it will notify the Client.</p>
+        <p>The main benefit of this approach is that this setup allows us to keep the Notification layer decoupled from the Rehydration and Reingestion layers which ensures that our system is easy to scale and update in the future.</p>
+
+        <!--Future Work-->
+        <h2 id="section-9" class="section-heading">9. Future Work</h2>
+        <h3>Improved Visibility</h3>
+        <figure><img class="xs case-study-image" src="images/case-study/visibility.gif" /></figure>
+        <p>As Arroyo currently exists, a user is notified within the Arroyo client UI when a rehydration task is initiated or completed. This simple notification system may work well for smaller rehydration tasks with relatively short processing times. However, a user might feel left in the dark if processing times were to increase due to increased log volume or network latency.</p>
+        <p>Developing a more robust system to notify users is one of Arroyo’s main goals moving forward. For example, we want to notify users at various stages within the rehydration process and improve error messaging in the case that a job fails.</p>
+        <h3>Improved Searching</h3>
+        <figure><img class="xs case-study-image" src="images/case-study/improved_searching.gif" /></figure>
+        <p>In the future, our team would like to expand Arroyo to be able to perform full-text searching to facilitate support for other log formats. We acknowledge that full-text searching is challenging at the best of times, but the ultimate goal would be to provide more flexibility for end users.</p>
+        <p>Another search-related feature our team would like to improve is Arroyo’s query rehydrate feature. Currently, Arroyo supports a maximum of two log attributes to search and rehydrate logs conditionally. We would like to enhance Arroyo's SQL expression-generating logic to support more complex queries.</p>
+        <h3>More Flexibility</h3>
+        <figure><img class="small case-study-image" src="images/case-study/cloud_providers.png" /></figure>
+        <p>At the moment, Arroyo only integrates with AWS S3. Moving forward, our team would like to develop a strategy to support other cloud storage providers. Our team acknowledges that this is a non-trivial task and would require a significant redesign of our application. Our ultimate goal would be to extend the benefits of log rehydration to a broader range of use cases.</p>
+
+        <!--References-->
+        <h2 id="section-10" class="section-heading">10. References</h2>
+        <ul class="numbered">
+          <li><a target="_blank" rel="noreferrer"  href="https://www.merriam-webster.com/" >Merriam-Webster</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://www.elastic.co/guide/en/logstash/current/index.html" >Logstash Reference [8.3] | Elastic</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html" >Elasticsearch Guide [master] | Elastic</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://www.elastic.co/guide/en/kibana/current/index.html" >Kibana Guide [8.3] | Elastic</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://opentelemetry.io/docs/concepts/" >Concepts | OpenTelemetry</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://netflixtechblog.com/lessons-from-building-observability-tools-at-netflix-7cfafed6ab17" >Lessons from Building Observability Tools at Netflix | by Netflix Technology Blog</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://aws.amazon.com/blogs/compute/building-scalable-applications-and-microservices-adding-messaging-to-your-toolbox/" >Optimize Lambda scaling when using Amazon SQS event sources</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://aws.amazon.com/blogs/compute/using-amazon-sqs-dead-letter-queues-to-control-message-failure" >Using Amazon SQS Dead-Letter Queues to Control Message Failure</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html#sqs-dead-letter-queues-when-to-use" >Amazon SQS dead-letter queues</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html" >Creating a role to delegate permissions to an IAM user - AWS Identity and Access Management</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html" >Best practices for working with AWS Lambda functions</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://aws.amazon.com/blogs/developer/introducing-support-for-amazon-s3-select-in-the-aws-sdk-for-javascript/" >Introducing support for Amazon S3 Select in the AWS SDK for JavaScript | AWS Developer Tools Blog</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html" >Policies and permissions in IAM - AWS Identity and Access Management</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://medium.com/geekculture/data-pipeline-from-kafka-to-elastic-search-using-logstash-5edca8d44d82" >Data Pipeline from Kafka To Elastic-search using logstash | by Eresh Gorantla | Geek Culture | Medium</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://docs.amazonaws.cn/en_us/AmazonS3/latest/userguide/selecting-content-from-objects.html" >Filtering and retrieving data using Amazon S3 Select</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://www.elastic.co/guide/en/logstash/current/plugins-inputs-http.html" >Http input plugin | Logstash Reference [8.3] | Elastic</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://www.elastic.co/guide/en/logstash/current/plugins-inputs-s3.html" >S3 input plugin | Logstash Reference [8.3] | Elastic</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://zapier.com/blog/what-are-webhooks/" >What are webhooks?</a></li>
+
+
+        </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>  
     </section>
   </div>
 
