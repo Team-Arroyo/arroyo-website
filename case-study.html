@@ -253,6 +253,116 @@
           <li>How do we collect the status of a reingestion job and then notify the client of its subsequent completion?</li>
         </ul>
         <h3>Log Rehydration via Message buffer</h3>
+        <p>To re-ingest logs from an Amazon S3 bucket, Logstash can be configured to access the bucket directly and re-ingest all the logs it contains. An input plugin allows Logstash to read a log event from a specific event source. For example, with the S3 input plugin, the S3 bucket is set as the event source.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/s3_input_plugin.png" /></figure>
+        <p>Using the S3 input plugin for our use case can be problematic because we do not need to re-ingest the entire bucket contents. This plugin does not allow us to specify files in the S3 bucket that we want to ingest into Logstash. 
+          We need to be able to re-ingest only the logs that fall within the provided date range or the logs that fall within the provided date range and contain the keywords provided by the user. One way to achieve that is to use an HTTP input plugin. HTTP plugin allows Logstash to accept logs via HTTP or HTTPS. 
+        </p>
+        <figure><img class="medium case-study-image" src="images/case-study/arroyo_to_logstash.png" /></figure>
+        <p>With the HTTP input plugin, we could send each rehydrated log or a whole log file as a POST request. However, there is a problem with this approach. 
+          If the number of rehydration tasks and POST requests to Logstash becomes unusually high, we could potentially overwhelm the Logstash service. 
+          Suppose a user submits a single rehydration request containing thousands of log files. In that case, there is a chance that Logstash won’t be able to process all incoming POST requests because of an exceptionally high rate of incoming requests. Some earlier requests may end up timing out, and for some new requests, Logstash may respond with 429 (Too Many Requests), resulting in lost log data. 
+        </p>
+        <p>To protect Logstash from being overwhelmed, we need to add a buffer. The buffer would serve as the event source and would allow Arroyo to queue the messages containing logs. A different component would take the messages off the buffer and process them.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/arroyo_to_buffer.png" /></figure>
+        <p>Adding a buffer would provide for better performance and reliability of the whole application because the messages can be processed at a rate that doesn’t overwhelm Logstash.</p>
+        <h4>Possible Solution: Kafka</h4>
+        <p>The first solution we came up with was introducing Kafka into our architecture.</p>
+        <p>Apache Kafka is a publish-subscribe messaging system. Kafka would serve as the middleman between the Arroyo application and the user's ELK stack.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/arroyo_to_kaftka.png" /></figure>
+        <p>To integrate Kafka, we would have to create and deploy a Kafka Producer and a Kafka Broker and configure the Logstash Kafka input plugin so that Logstash can accept Kafka events.</p>
+        <p>The Kafka Producer would be responsible for publishing logs as events to the Kafka topic. The Producer can either be a part of the Arroyo Server or a standalone application.</p>
+        <p>The Kafka Broker is a Kafka server that would be responsible for receiving and queueing the log data. We would also have to provision a separate server, most likely an Amazon EC2 instance, to host the Kafka Broker.</p>
+        <p>If we were to incorporate Kafka into our architecture, we would be able to have complete control over which logs are ingested and also ensure that the Rehydration and Reingestion layers are decoupled from the Arroyo Server logic.</p>
+        <p>This approach would work well, but after conducting more research, we concluded that setting up and managing Kafka comes with extra operational overhead. We were looking for a solution that is easier to set up and manage that is also highly scalable.</p>
+        <h4>Solution: AWS SQS and AWS Lambda</h4>
+        <p>We ended up implementing a combination of Amazon SQS Queue and an AWS Lambda Function.</p>
+        <p>The Queue would serve as a buffer, and the Lambda would perform rehydration and reingestion tasks.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/queue_to_lambda.gif" /></figure>
+        <h4>Amazon Simple Queue Service (SQS)</h4>
+        <p>Amazon Simple Queue Service is a fully managed solution that allows developers to create, use and manage a queue easily.</p>
+        <p>Using a queue allows us to create a buffer between the Arroyo Server and the Reingestion and Rehydration layers to prevent Logstash from getting overwhelmed.</p>
+        <p>The downside of this choice is that introducing new components like an SQS queue increases the overall complexity of the application. But even with the increased complexity, it made more sense for our use case to go with SQS since it is much easier to set up and manage than Kafka.</p>
+        <h4>AWS Lambda</h4>
+        <p>AWS Lambda is a serverless compute service that allows code to be run without provisioning servers. It is easily integrated with SQS. In our case, we programmatically created both an SQS Queue and an AWS Lambda function. We then set the SQS Queue as the Lambda function's trigger so that Lambda automatically spins up and performs rehydration and reingestion tasks once the Queue receives a message.</p>
+        <p>The main benefit of using a Lambda is that it takes on the execution of the rehydration and reingestion functions, freeing up our backend server to perform only essential tasks such as coordinating with the Arroyo Client and keeping track of the rehydration job's status.</p>
+        <p>The downside of using the Lambda function is that deploying it programmatically still requires a lot of work. To deploy the Lambda function, we had to create a separate S3 bucket and then upload Lambda's deployment package to it. The deployment package is a zip file containing all of the Lambda function's code and dependencies. Additionally, we had to create a separate IAM role and then attach it to Lambda so that it could access other AWS services.</p>
+        <h3>Handling failed queue messages</h3>
+        <p>Once we decided that using an Amazon SQS combined with an AWS Lambda works best for our use case, the next issue we needed to consider was how to ensure that the queue would not be blocked by any messages that the Lambda can’t consume. Message processing can fail for many reasons, such as issues in the lambda code, corrupted message payload, or network errors.</p>
+        <h4>Possible Solution: Error handling in Arroyo Server code.</h4>
+        <figure><img class="xs case-study-image" src="images/case-study/retry_logic.png" /></figure>
+        <p>The first approach we considered was adding more error handling and “retry” logic to the Server code. Upon further investigation, we realized that the logic required to implement this might be very complex because there is an infinite number of scenarios we would need to capture.</p>
+        <h4>Solution: A Dead Letter Queue</h4>
+        <p>A Dead-letter Queue (DLQ) is a queue that is created specifically to hold messages that can’t be consumed. It allows us to put aside failed messages so they don’t block the main queue.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/dql.gif" /></figure>
+        <p>Once the main queue receives a message, Lambda is triggered where it then attempts to process the message a specified number of times. If the message processing continues to fail and the SQS queue message retention is set to a relatively long period of time, or if the volume of messages is large, there is a chance of failed messages blocking the main queue.</p>
+        <p>A DLQ ensures that the main queue is not blocked and can recover quickly. If Lambda is unable to process the messages that are on the main queue, the messages are automatically transferred to the Dead Letter Queue.</p>
+        <p>With Dead-letter Queues, developers can configure alarms to signal when messages are transferred to a Dead Letter Queue, indicating that some error has occurred. Then they could attempt to reprocess the messages by redirecting them back to the main queue or examine logs to investigate what has caused the message processing to fail.</p>
+        <h3>Notifying the Client</h3>
+        <p>While developing Arroyo, we needed to ensure that the Client has visibility into the status of reingestion tasks and is notified of a task’s completion.</p>
+        <p>To achieve that, we needed to access the result of each POST request sent to Logstash, combine the results of all requests, and pass them to the Arroyo application.</p>
+        <h4>Possible Solution: Webhook</h4>
+        <p>The first solution we considered involved setting up a webhook.</p>
+        <p>A webhook is an API endpoint that accepts a data payload from a different service which in turn triggers some event.</p>
+        <p>Our backend would expose an endpoint - a webhook - that would accept POST requests, and each POST request would contain a status of a single reingestion job. We would need the user to provide a host or an IP address of the machine where the Arroyo application is deployed, and then we would need to pass that information to the Lambda function so that it would know where to send the POST request with the status.</p>
+        <p>This approach seemed like a viable solution. However, in this case, the Notification layer would be tightly coupled with the rest of the logic. Which we wanted to avoid because tightly coupled systems are harder to maintain and scale since their components are too dependent on each other.</p>
+        <h4>Status SQS Queue</h4>
+        <p>We decided to implement a second SQS queue, the Status SQS queue.</p>
+        <p>Once Lambda receives the response from Logstash, it will place a message containing the result of the request onto the Status SQS Queue. The Arroyo backend server would pick up and then process the message. Once all messages are processed, it will notify the Client.</p>
+        <p>The main benefit of this approach is that this setup allows us to keep the Notification layer decoupled from the Rehydration and Reingestion layers which ensures that our system is easy to scale and update in the future.</p>
+
+        <!--Future Work-->
+        <h2 id="section-9" class="section-heading">9. Future Work</h2>
+        <h3>Improved Visibility</h3>
+        <figure><img class="xs case-study-image" src="images/case-study/visibility.gif" /></figure>
+        <p>As Arroyo currently exists, a user is notified within the Arroyo client UI when a rehydration task is initiated or completed. This simple notification system may work well for smaller rehydration tasks with relatively short processing times. However, a user might feel left in the dark if processing times were to increase due to increased log volume or network latency.</p>
+        <p>Developing a more robust system to notify users is one of Arroyo’s main goals moving forward. For example, we want to notify users at various stages within the rehydration process and improve error messaging in the case that a job fails.</p>
+        <h3>Improved Searching</h3>
+        <figure><img class="xs case-study-image" src="images/case-study/improved_searching.gif" /></figure>
+        <p>In the future, our team would like to expand Arroyo to be able to perform full-text searching to facilitate support for other log formats. We acknowledge that full-text searching is challenging at the best of times, but the ultimate goal would be to provide more flexibility for end users.</p>
+        <p>Another search-related feature our team would like to improve is Arroyo’s query rehydrate feature. Currently, Arroyo supports a maximum of two log attributes to search and rehydrate logs conditionally. We would like to enhance Arroyo's SQL expression-generating logic to support more complex queries.</p>
+        <h3>More Flexibility</h3>
+        <figure><img class="small case-study-image" src="images/case-study/cloud_providers.png" /></figure>
+        <p>At the moment, Arroyo only integrates with AWS S3. Moving forward, our team would like to develop a strategy to support other cloud storage providers. Our team acknowledges that this is a non-trivial task and would require a significant redesign of our application. Our ultimate goal would be to extend the benefits of log rehydration to a broader range of use cases.</p>
+
+        <!--References-->
+        <h2 id="section-10" class="section-heading">10. References</h2>
+        <ul class="numbered">
+          <li><a target="_blank" rel="noreferrer"  href="https://www.merriam-webster.com/" >Merriam-Webster</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://www.elastic.co/guide/en/logstash/current/index.html" >Logstash Reference [8.3] | Elastic</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html" >Elasticsearch Guide [master] | Elastic</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://www.elastic.co/guide/en/kibana/current/index.html" >Kibana Guide [8.3] | Elastic</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://opentelemetry.io/docs/concepts/" >Concepts | OpenTelemetry</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://netflixtechblog.com/lessons-from-building-observability-tools-at-netflix-7cfafed6ab17" >Lessons from Building Observability Tools at Netflix | by Netflix Technology Blog</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://aws.amazon.com/blogs/compute/building-scalable-applications-and-microservices-adding-messaging-to-your-toolbox/" >Optimize Lambda scaling when using Amazon SQS event sources</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://aws.amazon.com/blogs/compute/using-amazon-sqs-dead-letter-queues-to-control-message-failure" >Using Amazon SQS Dead-Letter Queues to Control Message Failure</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html#sqs-dead-letter-queues-when-to-use" >Amazon SQS dead-letter queues</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html" >Creating a role to delegate permissions to an IAM user - AWS Identity and Access Management</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://docs.aws.amazon.com/lambda/latest/dg/best-practices.html" >Best practices for working with AWS Lambda functions</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://aws.amazon.com/blogs/developer/introducing-support-for-amazon-s3-select-in-the-aws-sdk-for-javascript/" >Introducing support for Amazon S3 Select in the AWS SDK for JavaScript | AWS Developer Tools Blog</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html" >Policies and permissions in IAM - AWS Identity and Access Management</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://medium.com/geekculture/data-pipeline-from-kafka-to-elastic-search-using-logstash-5edca8d44d82" >Data Pipeline from Kafka To Elastic-search using logstash | by Eresh Gorantla | Geek Culture | Medium</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://docs.amazonaws.cn/en_us/AmazonS3/latest/userguide/selecting-content-from-objects.html" >Filtering and retrieving data using Amazon S3 Select</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://www.elastic.co/guide/en/logstash/current/plugins-inputs-http.html" >Http input plugin | Logstash Reference [8.3] | Elastic</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://www.elastic.co/guide/en/logstash/current/plugins-inputs-s3.html" >S3 input plugin | Logstash Reference [8.3] | Elastic</a></li>
+          <li><a target="_blank" rel="noreferrer" href="https://zapier.com/blog/what-are-webhooks/" >What are webhooks?</a></li>
+
+
+        </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
