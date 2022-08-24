@@ -4035,8 +4035,24 @@ input, select, textarea {
 		line-height: 1.65;
 	}
 
+	#case-study b {
+		color: var(--gray-900)
+	}
+
+	#case-study .numbered {
+		list-style-type: decimal;
+	}
+
 	#case-study h1:after {
 		background-image: linear-gradient(to right, var(--steel-blue), black);
+	}
+
+	#case-study img {
+		max-width: 100%;
+		vertical-align: middle;
+		display: inline-block;
+		margin-inline-start: 0px;
+		margin-inline-end: 0px;
 	}
 
 	#case-logo {

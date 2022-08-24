@@ -164,6 +164,111 @@
 
         <!--Arroyo Architecture-->
         <h2 id="section-7" class="section-heading">7. Arroyo Architecture</h2>
+        <figure><img class="large case-study-image" src="images/case-study/arroyo_full_architecture.png" /></figure>
+        <p>The Arroyo application consists of an Arroyo Client and an Arroyo Server; the Arroyo Client is a React application that provides the Arroyo UI, while the Arroyo Server is a Node application that interacts with AWS resources and facilitates the rehydration and re-ingestion of logs.</p>
+        <p>The Arroyo Client and Arroyo Server applications are containerized using Docker and Docker Compose.</p>
+        <p>Let’s go over AWS services that Arroyo uses to perform the rehydration of logs.</p>
+        <h3>Arroyo AWS Resources</h3>
+        <p>During the installation, Arroyo provisions several AWS resources programmatically using AWS SDK.</p>
+        <ul>
+          <li>Arroyo provisions four SQS Queues: two main SQS queues - a Rehydration SQS Queue and a Status SQS Queue - and their corresponding Dead Letter Queues (DLQ).</li>
+          <li>Arroyo creates a separate S3 bucket to host the Lambda deployment package.</li>
+          <li>Arroyo also creates an IAM role for the Lambda function. The role has all the permissions the Lambda will need to interact with other AWS services.</li>
+          <li>Lastly, Arroyo creates the Lambda Function itself and sets the Rehydration SQS Queue as its Event trigger.</li>
+        </ul>
+        <figure><img class="medium case-study-image" src="images/case-study/arroyo_phases.png" /></figure>
+        <figcaption>Arroyo split into phases</figcaption>
+        <p>Conceptually, we can split the Arroyo application into three key phases: Rehydrate, Reingest, and Notify. Let’s take a look at each of them.</p>
+        <h3>Rehydrate</h3>
+        <figure><img class="medium case-study-image" src="images/case-study/rehydrate_phase.gif" /></figure>
+        <p>During the Rehydrate phase, the first phase in the log rehydration pipeline, the Arroyo Server receives a list of file names from the Arroyo Client. The list contains all the files that need to be rehydrated from the user’s S3 bucket into their ELK stack. To rehydrate a file, the Arroyo application has to either download the entire file or query that specific file using the user-provided query. Once Arroyo rehydrates the log data from the S3 bucket, it then passes it to the next phase.</p>
+        <p>Let’s take a look at the Rehydrate phase more closely, where the user can perform either bulk log rehydration or query-based log rehydration.</p>
+        <h4>Bulk Log Rehydration</h4>
+        <p>In the case of bulk log rehydration, the user specifies a date range. The Arroyo Client passes that date range to the Arroyo Server.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/bulk_rehydrate_high_level.png" /></figure>
+        <p>The Server then fetches the names of the log files (also called keys) that fall within that date range from the user’s S3 bucket.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/file_fetching.png" /></figure>
+        <p>The Server sends these keys to the Arroyo Client, which displays the file names to the user. The user may select the files that they would like to have rehydrated. Once the user clicks Ingest Selected Files, the Client forwards the selected file names to the Arroyo Server for rehydration.</p>
+        <figure><img class="large case-study-image" src="images/case-study/bulk_rehydrate.gif" /></figure>
+        <h4>Query-based Log Rehydration</h4>
+        <p>If the user decides to submit query-based rehydration, they may specify up to two log attributes and their corresponding values (a query) in addition to a date range. Once the user submits their rehydration request, the Client forwards the date range with the query to the Arroyo Server for rehydration.</p>
+        <figure><img class="large case-study-image" src="images/case-study/query_rehydrate.gif" /></figure>
+        <p>Once the Server receives the date range and an optional query from the Arroyo Client, it requests all of the files that fall within that date range, just as it does during bulk log rehydration. However, in this case, it does not forward the list to the Arroyo Client, and instead, it starts processing the rehydration request.</p>
+        <p>For each file name in the list, the Arroyo server creates a message and then places it onto the Rehydration SQS Queue. Within the body of the message, the Server includes the following information:</p>
+        <ul>
+          <li>The <b>S3 Bucket name</b> where logs are stored</li>
+          <li>The <b>Key</b> that represents the name of the file to be queried or fetched</li>
+          <li>The <b>Logstash endpoint</b> where Lambda will send the logs to</li>
+          <li>The <b>SQL expression</b>, built by the Arroyo Server using the search terms provided by the user</li>
+        </ul>
+        <figure><img class="medium case-study-image" src="images/case-study/message_1.png" /></figure>
+        <p>Once the first message is placed on the queue by Server, the Lambda function spins up.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/message_route.png" /></figure>
+        <p>Lambda picks up a message from the queue and, based on its contents, will do one of two things:</p>
+        <ul class="numbered">
+          <li>If the message body contains a SQL expression, Lambda will use that SQL expression to query the file, otherwise</li>
+          <li>the Lambda will fetch the whole file.</li>
+        </ul>
+        <figure><img class="medium case-study-image" src="images/case-study/lambda_fetch_files.png" /></figure>
+        <p>Now let’s explore how the log file is queried in more detail.</p>
+        <h4>Querying JSON files with Amazon S3 Select</h4>
+        <p>Arroyo performs the query by utilizing the <b>Amazon S3 Select</b> feature. S3 Select allows for retrieving a subset of data from an S3 bucket by submitting a query request containing a simple SQL statement. The log data stored in the S3 bucket must be in JSON format. Although S3 Select supports CSV or Apache Parquet in addition to JSON, Arroyo currently only supports JSON format.</p>
+        <p>To query the logs with S3 Select Arroyo uses the <b>selectObjectContent</b> action with the AWS SDK to create and submit a query request. Using keywords provided by the user Arroyo dynamically creates a SQL expression and then includes it in the request. Arroyo also specifies any matches to be serialized and returned in JSON format. Once Amazon S3 receives the request, it parses the data into records and returns the records that match the provided SQL expression.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/s3_select.png" /></figure>
+        <p>The ability to query individual log files and retrieve a subset of the files' contents drastically reduces the amount of data re-ingested into the user's ELK stack. For example, if the bucket contains 10,000 log files, each log is 32 Kilobytes in size on average; Let's assume that only 5% of the logs have relevant data. With bulk re-ingest, this would result in 320 Megabytes being introduced into a user’s ELK stack Considering that only 5% of the data would match the provided query, if we do query-based re-ingest instead, it will result in 16 Megabytes, which is 20 times less.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/comparison.png" /></figure>
+        <h3>Reingest</h3>
+        <p>During the Reingest phase, Arroyo needs to forward the log data fetched from the S3 bucket by the Lambda to the Logstash endpoint so that Logstash can pass it to Elasticsearch for indexing. Now let’s take a look at how exactly this happens.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/reingest_phase.gif" /></figure>
+        <p>The Lambda function makes a POST request containing rehydrated logs to the Logstash endpoint provided by the user. Once this request is complete, Logstash forwards the logs to Elasticsearch. After Elasticsearch indexes the logs, they are ready to be viewed in the Kibana dashboard.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/reingest_flow.png" /></figure>
+        <p>But how does the Arroyo Client know when the reingestion job is completed so that it can notify the user? Let’s take a look at how that happens.</p>
+        <h3>Notify</h3>
+        <p>During the Notify phase, the Arroyo Client needs to be notified about the outcome of the rehydration request that was processed during Rehydrate and Reingest phases so that it can let the user know when rehydration is complete.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/notify_phase.gif" /></figure>
+        <p>Once the logs have been rehydrated and forwarded to Logstash by Lambda during the Rehydrate and Reingest phases, the Arroyo Server needs to send an event to the Arroyo Client about whether or not the rehydration request was processed successfully.</p>
+        <p>After the logs are POSTed to the Logstash endpoint during the Reingest phase, Lambda gets a response from Logstash.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/logstash_conf.png" /></figure>
+        <p>It grabs the response data and packages it into a message containing the name of the log file (objectKey) sent and the request's status (status). It then places that message onto a Status SQS queue. The goal of the Status queue is to hold the status of the reingestion tasks for the Arroyo server to pick up.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/status_message.png" /></figure>
+        <p>At the same time, here is what happens on the Arroyo application server side.</p>
+        <p>Once the Arroyo Server finishes sending all of the messages to the Rehydration Queue, it starts polling the Status Queue.</p>
+        <figure><img class="small case-study-image" src="images/case-study/polling_for_messages.png" /></figure>
+        <p>The Arroyo Server is configured to receive at most ten messages from the Status Queue at a time. The body of each message contains the key field, which represents the name of the file that Lambda processed, and the status field that indicates the request's status. The Arroyo Server saves the body of each message and the corresponding receipt handle. 
+          Once the message is processed, the Arroyo Server tells the Status Queue to delete it by providing the message receipt handle.
+        </p>
+        <figure><img class="medium case-study-image" src="images/case-study/message_to_delete.png" /></figure>
+        <p>The Arroyo Server continuously polls the Status Queue for any new messages. It increments the counter once it gets a “No messages” response from the Status Queue. Once the counter is incremented three times, the Arroyo Server determines that there are no more messages and stops polling the queue.</p>
+        <figure><img class="small case-study-image" src="images/case-study/long_polling.png" /></figure>
+        <p>Once there are no more messages on the Status Queue, the Arroyo Server sends a single notification to the Arroyo Client via a server-sent event.</p>
+        <figure><img class="medium case-study-image" src="images/case-study/server_sent_event.png" /></figure>
+        <p>The Arroyo Client receives the notification event and then notifies the user via a toast message.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
