@@ -4330,3 +4330,19 @@ input, select, textarea {
 			color: var(--steel-blue);
 			transform: scale(1.2,1.2);
 		}
+
+/* Youtube */
+	.youtube-video-container {
+		padding-top: 56.25%;
+		height: 0px;
+		position: relative;
+		margin-bottom: 15px;
+	}
+
+	.youtube-video {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+	}
